@@ -20,7 +20,7 @@ spec:
   selector:
     app: powerai
   clusterIP: 
-  type: NodePort
+  type: LoadBalancer
   sessionAffinity: None
   externalTrafficPolicy: Cluster
 ---
@@ -37,7 +37,7 @@ metadata:
   - kubernetes.io/pvc-protection
   labels:
     type: shared
-  name: shared-datasets
+  name: shared-datasets-pvc
   namespace: powerai
 spec:
   accessModes:
@@ -94,6 +94,9 @@ spec:
       - name: work
         emptyDir: {}
       - name: jupyter-persistent-storage
+        persistentVolumeClaim:
+          claimName: powerai-pv-claim
+      - name: shared-datasets-pvc
         persistentVolumeClaim:
           claimName: powerai-pv-claim
       containers:

@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: powerai-service
+  namespace: powerai
+  labels:
+    app: powerai
+spec:
+  ports:
+  - name: ssh
+    protocol: TCP
+    port: 22
+    targetPort: 22
+  selector:
+    app: powerai
+  clusterIP: 
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: powerai-pv-claim
+  namespace: powerai
+  labels:
+    app: jupyter
+  annotations:
+    storageClass: nfs-client
+  finalizers:
+  - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  storageClassName: nfs-client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tf-notebook-powerai
+  namespace: powerai
+  labels:
+    app: tf-notebook-powerai
+  annotations:
+    deployment.kubernetes.io/revision: '3'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tf-notebook-powerai
+  template:
+    metadata:
+      labels:
+        app: tf-notebook-powerai
+    spec:
+      volumes:
+      - name: work
+        emptyDir: {}
+      - name: jupyter-persistent-storage
+        persistentVolumeClaim:
+          claimName: powerai-pv-claim
+      containers:
+      - name: tf-notebook-powerai
+        image: mycluster.icp:8500/powerai/powerai:1.5.4-all-ubuntu18.04-py3-ssh-key
+        env:
+        - name: SSH_KEY
+          value: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGM9XDvZNtedTGqwEdNuBQvLiF5KUzlqDjUC+Uotz1eg6QHsb8HPw/HeYGYJzQ+1swwnizJbVrve1YA0nKFCsyn6G3vZ1MGVfB4wMYDRa0nIaT68CqkMKWGjHNd5mjmptA1G274voaqFUJSpngESoDjllyA2/Yt+0Arb0efn2hFRkti2h8P0dmvaqLlgsj534HAPg62EWD5vTlrYoYwXAR3FANp2609sPvAVbTnnHlY+WRVI/MvBpEHIBZfFb0Vd9i9yok5bBoWfldr84ZE3X2tBqiA5DFSbr30iKYQxOGiGXslVaQ3Jmhi3jP/yxm120qI3SjZtcdVRMpao0Tn6UV a1733566@LC02WD1VYHV29"
+        ports:
+        - name: jupyter
+          containerPort: 8888
+          protocol: TCP
+        - name: tensorboard
+          containerPort: 6006
+          protocol: TCP
+        - name: ssh
+          containerPort: 22
+          protocol: TCP
+        resources:
+          limits:
+            nvidia.com/gpu: '1'
+        volumeMounts:
+        - name: work
+          mountPath: "/work"
+        - name: jupyter-persistent-storage
+          mountPath: "/notebooks/datasets"
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: File
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        gputype: nvidia-tesla-v100-16gb
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600 

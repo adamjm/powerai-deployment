@@ -24,7 +24,7 @@ c.NotebookApp.notebook_dir = '/notebooks/'
 if 'PASSWORD' in os.environ:
   password = os.environ['PASSWORD']
   if password:
-    c.NotebookApp.password = passwd(password)
+    c.NotebookApp.password = password
   else:
     c.NotebookApp.password = ''
     c.NotebookApp.token = ''

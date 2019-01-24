@@ -4,25 +4,41 @@ metadata:
   name: powerai-service
   namespace: powerai
   labels:
-    app: powerai
+    app: tf-notebook-powerai
 spec:
   ports:
   - name: ssh
     protocol: TCP
     port: 22
     targetPort: 22
+  - name: jupyter
     protocol: TCP
     port: 8888
     targetPort: 8888
+  - name: tensorboard
     protocol: TCP
     port: 6006
     targetPort: 6006
   selector:
-    app: powerai
+    app: tf-notebook-powerai
   clusterIP: 
   type: LoadBalancer
   sessionAffinity: None
   externalTrafficPolicy: Cluster
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: powerai
+spec:
+  accessModes:
+  - ReadOnlyMany
+  capacity:
+    storage: 2000Gi
+  nfs:
+    path: /mnt/datasets/standard-datasets
+    server: 172.23.19.126
+  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -45,7 +61,7 @@ spec:
   resources:
     requests:
       storage: 2000Gi
-  volumeName: shared-datasets
+  volumeName: powerai
 status:
   accessModes:
   - ReadOnlyMany
@@ -96,15 +112,17 @@ spec:
       - name: jupyter-persistent-storage
         persistentVolumeClaim:
           claimName: powerai-pv-claim
-      - name: shared-datasets-pvc
+      - name: shared-datasets
         persistentVolumeClaim:
-          claimName: powerai-pv-claim
+          claimName: shared-datasets-pvc
       containers:
       - name: tf-notebook-powerai
-        image: mycluster.icp:8500/powerai/powerai:1.5.4-all-ubuntu18.04-py3-ssh-key
+        image: mycluster.icp:8500/powerai/powerai-jupyter:1.5.4-all-ubuntu18.04-py3 
         env:
+        - name: PASSWORD
+          value: "sha1:b8fdd05ca4fd:ad4c757ca8132a4c51fb584f9e0c4aa08523b0b3"
         - name: SSH_KEY
-          value: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDxjEFkqpXE3EpeGXtXmsnI2Wl6xfs/8GNK4DnYNxLLSo4s5MkKksNMZu7B9gaH0nJ7SNuYsPe0IO4MKobhiXoGs8Bf2xjWJViVrchVllIrhjRKkarFH7LXY3PQPTpwEiJIQijRCIYXLPcvbeJ3wfYc9kpiLSTOoYhQyLUS+bx9kxUUeVUUUNC/2jUDpCkmf6RYqLPEhgmlOWWm0OmLOqc9iEvV8okXnhNtinMhd9YBtTar2GZhhwLKfr+hNbY9LbYZK0269fNv1+x927N/qqBuuFTSI8UCw3atpXyHPcXCELCVTsMceu7/NCvmcFvcYEZbGPI6y5vdLC6JE4U+65KB"
+          value: "ssh-rsa <key here>" 
         ports:
         - name: jupyter
           containerPort: 8888

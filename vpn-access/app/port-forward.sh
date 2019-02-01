@@ -12,5 +12,5 @@ echo $PASSWORD | openconnect --user $USER https://spcaus.spc.ibm.com/  --passwd-
 CERT=`grep servercert /tmp/cert.txt | awk '{print $2}'`
 rm /tmp/cert.txt
 echo 'Cert '$CERT''
-echo $PASSWORD | openconnect --user $USER https://spcaus.spc.ibm.com/ --servercert $CERT --passwd-on-stdin
+echo "$PASSWORD" | openconnect --user $USER https://spcaus.spc.ibm.com/ --servercert $CERT --passwd-on-stdin
 

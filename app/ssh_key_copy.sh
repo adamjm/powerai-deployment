@@ -20,7 +20,9 @@ source /opt/DL/caffe/bin/caffe-activate
 /usr/sbin/sshd -D & 
 #/opt/anaconda3/bin/conda install keras -y
 source /root/.bashrc
+pip install -e git+https://github.com/adamjm/autokeras.git#egg=autokeras
 python -m ipykernel install --name powerai --display-name "powerai"
+
 echo $PATH
 echo $PYTHONPATH
 echo $LD_LIBRARY_PATH

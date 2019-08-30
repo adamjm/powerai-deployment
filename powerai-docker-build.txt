@@ -1,0 +1,1517 @@
+Sending build context to Docker daemon  179.7kB
+Step 1/22 : FROM ibmcom/powerai:1.5.4-all-ubuntu18.04-py3
+ ---> 5fdfbb09ae06
+Step 2/22 : COPY app /app
+ ---> Using cache
+ ---> e95e9f8ad7fc
+Step 3/22 : WORKDIR /app
+ ---> Using cache
+ ---> 1678d9823f72
+Step 4/22 : USER root
+ ---> Using cache
+ ---> 5e365407d812
+Step 5/22 : RUN mkdir /root/.ssh && mkdir /home/pwrai/.ssh
+ ---> Using cache
+ ---> 5916363c1d48
+Step 6/22 : RUN mkdir -p /root/.jupyter && mkdir -p /home/pwrai/.jupyter && cp jupyter_notebook_config.py /root/.jupyter/ && cp jupyter_notebook_config.py /home/pwrai/.jupyter/
+ ---> Using cache
+ ---> 019f1bcc4775
+Step 7/22 : RUN chmod +x /app/ssh_key_copy.sh
+ ---> Using cache
+ ---> 7d50cfe97240
+Step 8/22 : RUN mkdir /run/sshd && mkdir /notebooks
+ ---> Using cache
+ ---> c65a4e6b6ed1
+Step 9/22 : COPY llvml-alternatives/ /app
+Sending build context to Docker daemon  180.7kB
+Step 1/22 : FROM ibmcom/powerai:1.5.4-all-ubuntu18.04-py3
+ ---> 5fdfbb09ae06
+Step 2/22 : COPY app /app
+ ---> Using cache
+ ---> e95e9f8ad7fc
+Step 3/22 : WORKDIR /app
+ ---> Using cache
+ ---> 1678d9823f72
+Step 4/22 : USER root
+ ---> Using cache
+ ---> 5e365407d812
+Step 5/22 : RUN mkdir /root/.ssh && mkdir /home/pwrai/.ssh
+ ---> Using cache
+ ---> 5916363c1d48
+Step 6/22 : RUN mkdir -p /root/.jupyter && mkdir -p /home/pwrai/.jupyter && cp jupyter_notebook_config.py /root/.jupyter/ && cp jupyter_notebook_config.py /home/pwrai/.jupyter/
+ ---> Using cache
+ ---> 019f1bcc4775
+Step 7/22 : RUN chmod +x /app/ssh_key_copy.sh
+ ---> Using cache
+ ---> 7d50cfe97240
+Step 8/22 : RUN mkdir /run/sshd && mkdir /notebooks
+ ---> Using cache
+ ---> c65a4e6b6ed1
+Step 9/22 : COPY llvm-alternatives/llvm-alternatives /app
+ ---> 4eb6ea567ae3
+Step 10/22 : RUN apt-get update && apt-get install -y git vim cmake gfortran wget &&  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && apt-get update && apt-get install -y libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime && chmod +x /app/llvm-alternatives && /app/llvm-alternatives
+ ---> Running in 88e3bd4c50b7
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic InRelease [242 kB]
+Ign:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:3 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:5 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release.gpg [819 B]
+Get:7 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release.gpg [801 B]
+Get:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Packages [39.6 kB]
+Get:9 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Packages [4630 B]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease [88.7 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease [74.6 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease [88.7 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el Packages [10.9 MB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic/restricted ppc64el Packages [572 B]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic/multiverse ppc64el Packages [162 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el Packages [1284 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el Packages [769 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/restricted ppc64el Packages [580 B]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el Packages [535 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic-updates/multiverse ppc64el Packages [2208 B]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic-backports/universe ppc64el Packages [3655 B]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic-security/universe ppc64el Packages [133 kB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports bionic-security/main ppc64el Packages [230 kB]
+Get:24 http://ports.ubuntu.com/ubuntu-ports bionic-security/multiverse ppc64el Packages [1409 B]
+Fetched 14.6 MB in 8s (1885 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  cmake-data gfortran-7 git-man less libarchive13 libcurl3-gnutls
+  liberror-perl libgfortran-7-dev libgfortran4 libgpm2 libjsoncpp1 liblzo2-2
+  librhash0 libuv1 vim-common vim-runtime xxd
+Suggested packages:
+  cmake-doc ninja-build gfortran-doc gfortran-7-doc libgfortran4-dbg
+  libcoarrays-dev gettext-base git-daemon-run | git-daemon-sysvinit git-doc
+  git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn lrzip gpm
+  ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  cmake cmake-data gfortran gfortran-7 git git-man less libarchive13
+  libcurl3-gnutls liberror-perl libgfortran-7-dev libgfortran4 libgpm2
+  libjsoncpp1 liblzo2-2 librhash0 libuv1 vim vim-common vim-runtime wget xxd
+0 upgraded, 22 newly installed, 0 to remove and 80 not upgraded.
+Need to get 26.6 MB of archives.
+After this operation, 151 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liblzo2-2 ppc64el 2.08-1.2 [67.2 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el less ppc64el 487-0.1 [130 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el xxd ppc64el 2:8.0.1453-1ubuntu1 [49.2 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-common all 2:8.0.1453-1ubuntu1 [70.4 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el wget ppc64el 1.19.4-1ubuntu2.1 [330 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake-data all 3.10.2-1ubuntu2 [1331 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libarchive13 ppc64el 3.2.2-3.1ubuntu0.2 [352 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjsoncpp1 ppc64el 1.7.4-3 [79.0 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el librhash0 ppc64el 1.3.6-2 [81.8 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libuv1 ppc64el 1.18.0-3 [63.6 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake ppc64el 3.10.2-1ubuntu2 [3548 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran4 ppc64el 7.3.0-27ubuntu1~18.04 [293 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran-7-dev ppc64el 7.3.0-27ubuntu1~18.04 [348 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran-7 ppc64el 7.3.0-27ubuntu1~18.04 [6670 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran ppc64el 4:7.3.0-3ubuntu2.1 [1348 B]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libcurl3-gnutls ppc64el 7.58.0-2ubuntu3.6 [217 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liberror-perl all 0.17025-1 [22.8 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git-man all 1:2.17.1-1ubuntu0.4 [803 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git ppc64el 1:2.17.1-1ubuntu0.4 [5314 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libgpm2 ppc64el 1.20.7-5 [15.8 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-runtime all 2:8.0.1453-1ubuntu1 [5437 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim ppc64el 2:8.0.1453-1ubuntu1 [1355 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 26.6 MB in 10s (2656 kB/s)
+Selecting previously unselected package liblzo2-2:ppc64el.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 58477 files and directories currently installed.)
+Preparing to unpack .../00-liblzo2-2_2.08-1.2_ppc64el.deb ...
+Unpacking liblzo2-2:ppc64el (2.08-1.2) ...
+Selecting previously unselected package less.
+Preparing to unpack .../01-less_487-0.1_ppc64el.deb ...
+Unpacking less (487-0.1) ...
+Selecting previously unselected package xxd.
+Preparing to unpack .../02-xxd_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking xxd (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../03-vim-common_2%3a8.0.1453-1ubuntu1_all.deb ...
+Unpacking vim-common (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../04-wget_1.19.4-1ubuntu2.1_ppc64el.deb ...
+Unpacking wget (1.19.4-1ubuntu2.1) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../05-cmake-data_3.10.2-1ubuntu2_all.deb ...
+Unpacking cmake-data (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libarchive13:ppc64el.
+Preparing to unpack .../06-libarchive13_3.2.2-3.1ubuntu0.2_ppc64el.deb ...
+Unpacking libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Selecting previously unselected package libjsoncpp1:ppc64el.
+Preparing to unpack .../07-libjsoncpp1_1.7.4-3_ppc64el.deb ...
+Unpacking libjsoncpp1:ppc64el (1.7.4-3) ...
+Selecting previously unselected package librhash0:ppc64el.
+Preparing to unpack .../08-librhash0_1.3.6-2_ppc64el.deb ...
+Unpacking librhash0:ppc64el (1.3.6-2) ...
+Selecting previously unselected package libuv1:ppc64el.
+Preparing to unpack .../09-libuv1_1.18.0-3_ppc64el.deb ...
+Unpacking libuv1:ppc64el (1.18.0-3) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../10-cmake_3.10.2-1ubuntu2_ppc64el.deb ...
+Unpacking cmake (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libgfortran4:ppc64el.
+Preparing to unpack .../11-libgfortran4_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package libgfortran-7-dev:ppc64el.
+Preparing to unpack .../12-libgfortran-7-dev_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran-7.
+Preparing to unpack .../13-gfortran-7_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran.
+Preparing to unpack .../14-gfortran_4%3a7.3.0-3ubuntu2.1_ppc64el.deb ...
+Unpacking gfortran (4:7.3.0-3ubuntu2.1) ...
+Selecting previously unselected package libcurl3-gnutls:ppc64el.
+Preparing to unpack .../15-libcurl3-gnutls_7.58.0-2ubuntu3.6_ppc64el.deb ...
+Unpacking libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../16-liberror-perl_0.17025-1_all.deb ...
+Unpacking liberror-perl (0.17025-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../17-git-man_1%3a2.17.1-1ubuntu0.4_all.deb ...
+Unpacking git-man (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package git.
+Preparing to unpack .../18-git_1%3a2.17.1-1ubuntu0.4_ppc64el.deb ...
+Unpacking git (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package libgpm2:ppc64el.
+Preparing to unpack .../19-libgpm2_1.20.7-5_ppc64el.deb ...
+Unpacking libgpm2:ppc64el (1.20.7-5) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../20-vim-runtime_2%3a8.0.1453-1ubuntu1_all.deb ...
+Adding 'diversion of /usr/share/vim/vim80/doc/help.txt to /usr/share/vim/vim80/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim80/doc/tags to /usr/share/vim/vim80/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../21-vim_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking vim (2:8.0.1453-1ubuntu1) ...
+Setting up git-man (1:2.17.1-1ubuntu0.4) ...
+Setting up less (487-0.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Processing triggers for mime-support (3.60ubuntu1) ...
+Setting up libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up xxd (2:8.0.1453-1ubuntu1) ...
+Setting up liberror-perl (0.17025-1) ...
+Setting up libgpm2:ppc64el (1.20.7-5) ...
+Setting up libuv1:ppc64el (1.18.0-3) ...
+Setting up libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Setting up cmake-data (3.10.2-1ubuntu2) ...
+Setting up librhash0:ppc64el (1.3.6-2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Setting up libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up wget (1.19.4-1ubuntu2.1) ...
+Setting up vim-common (2:8.0.1453-1ubuntu1) ...
+Setting up gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Setting up vim-runtime (2:8.0.1453-1ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Setting up git (1:2.17.1-1ubuntu0.4) ...
+Setting up liblzo2-2:ppc64el (2.08-1.2) ...
+Setting up libjsoncpp1:ppc64el (1.7.4-3) ...
+Setting up gfortran (4:7.3.0-3ubuntu2.1) ...
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f95 (f95) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f95.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f95) doesn't exist
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f77 (f77) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f77.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f77) doesn't exist
+Setting up vim (2:8.0.1453-1ubuntu1) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/vi.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/vi.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/vi.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/vi.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/vi.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/vi.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/view.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/view.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/view.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/view.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/view.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/ex.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/ex.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/ex.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/ex.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/ex.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/ex.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/editor.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/editor.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/editor.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/editor.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/editor.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group editor) doesn't exist
+Setting up libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Setting up cmake (3.10.2-1ubuntu2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+[91m--2019-02-07 01:44:33--  https://apt.llvm.org/llvm-snapshot.gpg.key
+[0m[91mResolving apt.llvm.org (apt.llvm.org)... [0m[91mWarning: apt-key output should not be parsed (stdout is not a terminal)
+[0m[91m151.101.54.49, 2a04:4e42:6::561
+Connecting to apt.llvm.org (apt.llvm.org)|151.101.54.49|:443... [0m[91mconnected.
+[0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
+Length: 3145[0m[91m (3.1K) [application/octet-stream]
+Saving to: 'STDOUT'
+
+     0K ...                         [0m[91m                          100% 40.5M=0s
+
+[0m[91m2019-02-07 01:44:34 (40.5 MB/s) - written to stdout [3145/3145]
+
+[0mOK
+Ign:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:2 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Hit:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release
+Hit:4 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release
+Hit:6 http://ports.ubuntu.com/ubuntu-ports bionic InRelease
+Hit:8 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease
+Hit:9 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease
+Hit:10 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binfmt-support camlp4 file javascript-common ledit libcamlp4-ocaml-dev
+  libctypes-ocaml libctypes-ocaml-dev libffi-dev libfindlib-ocaml
+  libfindlib-ocaml-dev libjs-jquery libjs-underscore libmagic-mgc libmagic1
+  libncurses5-dev libpipeline1 libtinfo-dev ocaml-base-nox ocaml-compiler-libs
+  ocaml-findlib ocaml-interp ocaml-nox
+Suggested packages:
+  apache2 | lighttpd | httpd ncurses-doc ocaml-doc tuareg-mode | ocaml-mode
+The following NEW packages will be installed:
+  binfmt-support camlp4 file javascript-common ledit libcamlp4-ocaml-dev
+  libctypes-ocaml libctypes-ocaml-dev libffi-dev libfindlib-ocaml
+  libfindlib-ocaml-dev libjs-jquery libjs-underscore libllvm-7-ocaml-dev
+  libllvm7 libmagic-mgc libmagic1 libncurses5-dev libpipeline1 libtinfo-dev
+  llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime ocaml-base-nox
+  ocaml-compiler-libs ocaml-findlib ocaml-interp ocaml-nox
+0 upgraded, 30 newly installed, 0 to remove and 80 not upgraded.
+Need to get 123 MB of archives.
+After this operation, 709 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libmagic-mgc ppc64el 1:5.32-2ubuntu0.1 [184 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libmagic1 ppc64el 1:5.32-2ubuntu0.1 [76.7 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el file ppc64el 1:5.32-2ubuntu0.1 [22.7 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libpipeline1 ppc64el 1.5.0-1 [24.7 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el binfmt-support ppc64el 2.1.8-2 [60.1 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-base-nox ppc64el 4.05.0-10ubuntu1 [542 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libtinfo-dev ppc64el 6.1-1ubuntu1.18.04 [100 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libncurses5-dev ppc64el 6.1-1ubuntu1.18.04 [200 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-compiler-libs ppc64el 4.05.0-10ubuntu1 [18.9 MB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-interp ppc64el 4.05.0-10ubuntu1 [3465 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-nox ppc64el 4.05.0-10ubuntu1 [28.3 MB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libcamlp4-ocaml-dev ppc64el 4.05+1-2 [16.5 MB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el camlp4 ppc64el 4.05+1-2 [5730 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el javascript-common all 11 [6066 B]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ledit all 2.03-6 [44.9 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libctypes-ocaml ppc64el 0.7.0-1build2 [230 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libctypes-ocaml-dev ppc64el 0.7.0-1build2 [571 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libfindlib-ocaml ppc64el 1.7.3-2 [166 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libfindlib-ocaml-dev ppc64el 1.7.3-2 [149 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjs-jquery all 3.2.1-1 [152 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjs-underscore all 1.8.3~dfsg-1 [59.9 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libllvm7 ppc64el 1:7-3~ubuntu0.18.04.1 [14.9 MB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libffi-dev ppc64el 3.2.1-8 [163 kB]
+Get:24 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-runtime ppc64el 1:7-3~ubuntu0.18.04.1 [684 kB]
+Get:25 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7 ppc64el 1:7-3~ubuntu0.18.04.1 [4862 kB]
+Get:26 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-dev ppc64el 1:7-3~ubuntu0.18.04.1 [23.7 MB]
+Get:27 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el libllvm-7-ocaml-dev ppc64el 1:7-3~ubuntu0.18.04.1 [183 kB]
+Get:28 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-doc all 1:7-3~ubuntu0.18.04.1 [1995 kB]
+Get:29 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-examples all 1:7-3~ubuntu0.18.04.1 [231 kB]
+Get:30 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-findlib ppc64el 1.7.3-2 [395 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 123 MB in 37s (3284 kB/s)
+Selecting previously unselected package libmagic-mgc.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 63713 files and directories currently installed.)
+Preparing to unpack .../00-libmagic-mgc_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking libmagic-mgc (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package libmagic1:ppc64el.
+Preparing to unpack .../01-libmagic1_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking libmagic1:ppc64el (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package file.
+Preparing to unpack .../02-file_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking file (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package libpipeline1:ppc64el.
+Preparing to unpack .../03-libpipeline1_1.5.0-1_ppc64el.deb ...
+Unpacking libpipeline1:ppc64el (1.5.0-1) ...
+Selecting previously unselected package binfmt-support.
+Preparing to unpack .../04-binfmt-support_2.1.8-2_ppc64el.deb ...
+Unpacking binfmt-support (2.1.8-2) ...
+Selecting previously unselected package ocaml-base-nox.
+Preparing to unpack .../05-ocaml-base-nox_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-base-nox (4.05.0-10ubuntu1) ...
+Selecting previously unselected package libtinfo-dev:ppc64el.
+Preparing to unpack .../06-libtinfo-dev_6.1-1ubuntu1.18.04_ppc64el.deb ...
+Unpacking libtinfo-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Selecting previously unselected package libncurses5-dev:ppc64el.
+Preparing to unpack .../07-libncurses5-dev_6.1-1ubuntu1.18.04_ppc64el.deb ...
+Unpacking libncurses5-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Selecting previously unselected package ocaml-compiler-libs.
+Preparing to unpack .../08-ocaml-compiler-libs_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-compiler-libs (4.05.0-10ubuntu1) ...
+Selecting previously unselected package ocaml-interp.
+Preparing to unpack .../09-ocaml-interp_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-interp (4.05.0-10ubuntu1) ...
+Selecting previously unselected package ocaml-nox.
+Preparing to unpack .../10-ocaml-nox_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-nox (4.05.0-10ubuntu1) ...
+Selecting previously unselected package libcamlp4-ocaml-dev.
+Preparing to unpack .../11-libcamlp4-ocaml-dev_4.05+1-2_ppc64el.deb ...
+Unpacking libcamlp4-ocaml-dev (4.05+1-2) ...
+Selecting previously unselected package camlp4.
+Preparing to unpack .../12-camlp4_4.05+1-2_ppc64el.deb ...
+Unpacking camlp4 (4.05+1-2) ...
+Selecting previously unselected package javascript-common.
+Preparing to unpack .../13-javascript-common_11_all.deb ...
+Unpacking javascript-common (11) ...
+Selecting previously unselected package ledit.
+Preparing to unpack .../14-ledit_2.03-6_all.deb ...
+Unpacking ledit (2.03-6) ...
+Selecting previously unselected package libctypes-ocaml.
+Preparing to unpack .../15-libctypes-ocaml_0.7.0-1build2_ppc64el.deb ...
+Unpacking libctypes-ocaml (0.7.0-1build2) ...
+Selecting previously unselected package libctypes-ocaml-dev.
+Preparing to unpack .../16-libctypes-ocaml-dev_0.7.0-1build2_ppc64el.deb ...
+Unpacking libctypes-ocaml-dev (0.7.0-1build2) ...
+Selecting previously unselected package libfindlib-ocaml.
+Preparing to unpack .../17-libfindlib-ocaml_1.7.3-2_ppc64el.deb ...
+Unpacking libfindlib-ocaml (1.7.3-2) ...
+Selecting previously unselected package libfindlib-ocaml-dev.
+Preparing to unpack .../18-libfindlib-ocaml-dev_1.7.3-2_ppc64el.deb ...
+Unpacking libfindlib-ocaml-dev (1.7.3-2) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../19-libjs-jquery_3.2.1-1_all.deb ...
+Unpacking libjs-jquery (3.2.1-1) ...
+Selecting previously unselected package libjs-underscore.
+Preparing to unpack .../20-libjs-underscore_1.8.3~dfsg-1_all.deb ...
+Unpacking libjs-underscore (1.8.3~dfsg-1) ...
+Selecting previously unselected package libllvm7:ppc64el.
+Preparing to unpack .../21-libllvm7_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking libllvm7:ppc64el (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package libffi-dev:ppc64el.
+Preparing to unpack .../22-libffi-dev_3.2.1-8_ppc64el.deb ...
+Unpacking libffi-dev:ppc64el (3.2.1-8) ...
+Selecting previously unselected package llvm-7-runtime.
+Preparing to unpack .../23-llvm-7-runtime_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7-runtime (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7.
+Preparing to unpack .../24-llvm-7_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7 (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-dev.
+Preparing to unpack .../25-llvm-7-dev_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7-dev (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package libllvm-7-ocaml-dev.
+Preparing to unpack .../26-libllvm-7-ocaml-dev_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking libllvm-7-ocaml-dev (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-doc.
+Preparing to unpack .../27-llvm-7-doc_1%3a7-3~ubuntu0.18.04.1_all.deb ...
+Unpacking llvm-7-doc (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-examples.
+Preparing to unpack .../28-llvm-7-examples_1%3a7-3~ubuntu0.18.04.1_all.deb ...
+Unpacking llvm-7-examples (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package ocaml-findlib.
+Preparing to unpack .../29-ocaml-findlib_1.7.3-2_ppc64el.deb ...
+Unpacking ocaml-findlib (1.7.3-2) ...
+Setting up libjs-jquery (3.2.1-1) ...
+Setting up libjs-underscore (1.8.3~dfsg-1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+Setting up libllvm7:ppc64el (1:7-3~ubuntu0.18.04.1) ...
+Setting up ocaml-base-nox (4.05.0-10ubuntu1) ...
+Setting up libtinfo-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Setting up libffi-dev:ppc64el (3.2.1-8) ...
+Setting up libpipeline1:ppc64el (1.5.0-1) ...
+Setting up libctypes-ocaml (0.7.0-1build2) ...
+Setting up libmagic-mgc (1:5.32-2ubuntu0.1) ...
+Setting up libmagic1:ppc64el (1:5.32-2ubuntu0.1) ...
+Setting up libncurses5-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Setting up llvm-7-doc (1:7-3~ubuntu0.18.04.1) ...
+Setting up javascript-common (11) ...
+Setting up libfindlib-ocaml (1.7.3-2) ...
+Setting up ocaml-findlib (1.7.3-2) ...
+Setting up binfmt-support (2.1.8-2) ...
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+invoke-rc.d: could not determine current runlevel
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up ledit (2.03-6) ...
+update-alternatives: using /usr/bin/ledit to provide /usr/bin/readline-editor (readline-editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/readline-editor.1.gz because associated file /usr/share/man/man1/ledit.1.gz (of link group readline-editor) doesn't exist
+Setting up file (1:5.32-2ubuntu0.1) ...
+Setting up llvm-7-runtime (1:7-3~ubuntu0.18.04.1) ...
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+Setting up llvm-7 (1:7-3~ubuntu0.18.04.1) ...
+Setting up llvm-7-dev (1:7-3~ubuntu0.18.04.1) ...
+Setting up llvm-7-examples (1:7-3~ubuntu0.18.04.1) ...
+Setting up ocaml-compiler-libs (4.05.0-10ubuntu1) ...
+Setting up ocaml-interp (4.05.0-10ubuntu1) ...
+Setting up ocaml-nox (4.05.0-10ubuntu1) ...
+Setting up libcamlp4-ocaml-dev (4.05+1-2) ...
+Setting up camlp4 (4.05+1-2) ...
+Setting up libctypes-ocaml-dev (0.7.0-1build2) ...
+Setting up libfindlib-ocaml-dev (1.7.3-2) ...
+Setting up libllvm-7-ocaml-dev (1:7-3~ubuntu0.18.04.1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+[91mupdate-alternatives: error: alternative path /usr/bin/llvm-config-7.3 doesn't exist
+[0m[91mupdate-alternatives: error: alternative path /usr/bin/llvm-config-7.3 doesn't exist
+[0mSending build context to Docker daemon  213.5kB
+Step 1/22 : FROM ibmcom/powerai:1.5.4-all-ubuntu18.04-py3
+ ---> 5fdfbb09ae06
+Step 2/22 : COPY app /app
+ ---> Using cache
+ ---> e95e9f8ad7fc
+Step 3/22 : WORKDIR /app
+ ---> Using cache
+ ---> 1678d9823f72
+Step 4/22 : USER root
+ ---> Using cache
+ ---> 5e365407d812
+Step 5/22 : RUN mkdir /root/.ssh && mkdir /home/pwrai/.ssh
+ ---> Using cache
+ ---> 5916363c1d48
+Step 6/22 : RUN mkdir -p /root/.jupyter && mkdir -p /home/pwrai/.jupyter && cp jupyter_notebook_config.py /root/.jupyter/ && cp jupyter_notebook_config.py /home/pwrai/.jupyter/
+ ---> Using cache
+ ---> 019f1bcc4775
+Step 7/22 : RUN chmod +x /app/ssh_key_copy.sh
+ ---> Using cache
+ ---> 7d50cfe97240
+Step 8/22 : RUN mkdir /run/sshd && mkdir /notebooks
+ ---> Using cache
+ ---> c65a4e6b6ed1
+Step 9/22 : COPY llvm-alternatives/llvm-alternatives /app
+ ---> Using cache
+ ---> 4eb6ea567ae3
+Step 10/22 : RUN apt-get update && apt-get install -y git vim cmake gfortran wget &&  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && apt-get update && apt-get install -y libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime llvm-7-config
+ ---> Running in 5b8ef1f830e9
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic InRelease [242 kB]
+Ign:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:3 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:5 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release.gpg [819 B]
+Get:7 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release.gpg [801 B]
+Get:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Packages [39.6 kB]
+Get:9 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Packages [4630 B]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease [88.7 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease [74.6 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease [88.7 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el Packages [10.9 MB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic/restricted ppc64el Packages [572 B]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el Packages [1284 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic/multiverse ppc64el Packages [162 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el Packages [535 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/restricted ppc64el Packages [580 B]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el Packages [769 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic-updates/multiverse ppc64el Packages [2208 B]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic-backports/universe ppc64el Packages [3655 B]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic-security/universe ppc64el Packages [133 kB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports bionic-security/main ppc64el Packages [230 kB]
+Get:24 http://ports.ubuntu.com/ubuntu-ports bionic-security/multiverse ppc64el Packages [1409 B]
+Fetched 14.6 MB in 8s (1856 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  cmake-data gfortran-7 git-man less libarchive13 libcurl3-gnutls
+  liberror-perl libgfortran-7-dev libgfortran4 libgpm2 libjsoncpp1 liblzo2-2
+  librhash0 libuv1 vim-common vim-runtime xxd
+Suggested packages:
+  cmake-doc ninja-build gfortran-doc gfortran-7-doc libgfortran4-dbg
+  libcoarrays-dev gettext-base git-daemon-run | git-daemon-sysvinit git-doc
+  git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn lrzip gpm
+  ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  cmake cmake-data gfortran gfortran-7 git git-man less libarchive13
+  libcurl3-gnutls liberror-perl libgfortran-7-dev libgfortran4 libgpm2
+  libjsoncpp1 liblzo2-2 librhash0 libuv1 vim vim-common vim-runtime wget xxd
+0 upgraded, 22 newly installed, 0 to remove and 80 not upgraded.
+Need to get 26.6 MB of archives.
+After this operation, 151 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liblzo2-2 ppc64el 2.08-1.2 [67.2 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el less ppc64el 487-0.1 [130 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el xxd ppc64el 2:8.0.1453-1ubuntu1 [49.2 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-common all 2:8.0.1453-1ubuntu1 [70.4 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el wget ppc64el 1.19.4-1ubuntu2.1 [330 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake-data all 3.10.2-1ubuntu2 [1331 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libarchive13 ppc64el 3.2.2-3.1ubuntu0.2 [352 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjsoncpp1 ppc64el 1.7.4-3 [79.0 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el librhash0 ppc64el 1.3.6-2 [81.8 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libuv1 ppc64el 1.18.0-3 [63.6 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake ppc64el 3.10.2-1ubuntu2 [3548 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran4 ppc64el 7.3.0-27ubuntu1~18.04 [293 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran-7-dev ppc64el 7.3.0-27ubuntu1~18.04 [348 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran-7 ppc64el 7.3.0-27ubuntu1~18.04 [6670 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran ppc64el 4:7.3.0-3ubuntu2.1 [1348 B]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libcurl3-gnutls ppc64el 7.58.0-2ubuntu3.6 [217 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liberror-perl all 0.17025-1 [22.8 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git-man all 1:2.17.1-1ubuntu0.4 [803 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git ppc64el 1:2.17.1-1ubuntu0.4 [5314 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libgpm2 ppc64el 1.20.7-5 [15.8 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-runtime all 2:8.0.1453-1ubuntu1 [5437 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim ppc64el 2:8.0.1453-1ubuntu1 [1355 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 26.6 MB in 10s (2712 kB/s)
+Selecting previously unselected package liblzo2-2:ppc64el.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 58477 files and directories currently installed.)
+Preparing to unpack .../00-liblzo2-2_2.08-1.2_ppc64el.deb ...
+Unpacking liblzo2-2:ppc64el (2.08-1.2) ...
+Selecting previously unselected package less.
+Preparing to unpack .../01-less_487-0.1_ppc64el.deb ...
+Unpacking less (487-0.1) ...
+Selecting previously unselected package xxd.
+Preparing to unpack .../02-xxd_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking xxd (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../03-vim-common_2%3a8.0.1453-1ubuntu1_all.deb ...
+Unpacking vim-common (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../04-wget_1.19.4-1ubuntu2.1_ppc64el.deb ...
+Unpacking wget (1.19.4-1ubuntu2.1) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../05-cmake-data_3.10.2-1ubuntu2_all.deb ...
+Unpacking cmake-data (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libarchive13:ppc64el.
+Preparing to unpack .../06-libarchive13_3.2.2-3.1ubuntu0.2_ppc64el.deb ...
+Unpacking libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Selecting previously unselected package libjsoncpp1:ppc64el.
+Preparing to unpack .../07-libjsoncpp1_1.7.4-3_ppc64el.deb ...
+Unpacking libjsoncpp1:ppc64el (1.7.4-3) ...
+Selecting previously unselected package librhash0:ppc64el.
+Preparing to unpack .../08-librhash0_1.3.6-2_ppc64el.deb ...
+Unpacking librhash0:ppc64el (1.3.6-2) ...
+Selecting previously unselected package libuv1:ppc64el.
+Preparing to unpack .../09-libuv1_1.18.0-3_ppc64el.deb ...
+Unpacking libuv1:ppc64el (1.18.0-3) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../10-cmake_3.10.2-1ubuntu2_ppc64el.deb ...
+Unpacking cmake (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libgfortran4:ppc64el.
+Preparing to unpack .../11-libgfortran4_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package libgfortran-7-dev:ppc64el.
+Preparing to unpack .../12-libgfortran-7-dev_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran-7.
+Preparing to unpack .../13-gfortran-7_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran.
+Preparing to unpack .../14-gfortran_4%3a7.3.0-3ubuntu2.1_ppc64el.deb ...
+Unpacking gfortran (4:7.3.0-3ubuntu2.1) ...
+Selecting previously unselected package libcurl3-gnutls:ppc64el.
+Preparing to unpack .../15-libcurl3-gnutls_7.58.0-2ubuntu3.6_ppc64el.deb ...
+Unpacking libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../16-liberror-perl_0.17025-1_all.deb ...
+Unpacking liberror-perl (0.17025-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../17-git-man_1%3a2.17.1-1ubuntu0.4_all.deb ...
+Unpacking git-man (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package git.
+Preparing to unpack .../18-git_1%3a2.17.1-1ubuntu0.4_ppc64el.deb ...
+Unpacking git (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package libgpm2:ppc64el.
+Preparing to unpack .../19-libgpm2_1.20.7-5_ppc64el.deb ...
+Unpacking libgpm2:ppc64el (1.20.7-5) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../20-vim-runtime_2%3a8.0.1453-1ubuntu1_all.deb ...
+Adding 'diversion of /usr/share/vim/vim80/doc/help.txt to /usr/share/vim/vim80/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim80/doc/tags to /usr/share/vim/vim80/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../21-vim_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking vim (2:8.0.1453-1ubuntu1) ...
+Setting up git-man (1:2.17.1-1ubuntu0.4) ...
+Setting up less (487-0.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Processing triggers for mime-support (3.60ubuntu1) ...
+Setting up libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up xxd (2:8.0.1453-1ubuntu1) ...
+Setting up liberror-perl (0.17025-1) ...
+Setting up libgpm2:ppc64el (1.20.7-5) ...
+Setting up libuv1:ppc64el (1.18.0-3) ...
+Setting up libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Setting up cmake-data (3.10.2-1ubuntu2) ...
+Setting up librhash0:ppc64el (1.3.6-2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Setting up libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up wget (1.19.4-1ubuntu2.1) ...
+Setting up vim-common (2:8.0.1453-1ubuntu1) ...
+Setting up gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Setting up vim-runtime (2:8.0.1453-1ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Setting up git (1:2.17.1-1ubuntu0.4) ...
+Setting up liblzo2-2:ppc64el (2.08-1.2) ...
+Setting up libjsoncpp1:ppc64el (1.7.4-3) ...
+Setting up gfortran (4:7.3.0-3ubuntu2.1) ...
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f95 (f95) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f95.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f95) doesn't exist
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f77 (f77) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f77.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f77) doesn't exist
+Setting up vim (2:8.0.1453-1ubuntu1) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/vi.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/vi.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/vi.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/vi.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/vi.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/vi.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/view.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/view.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/view.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/view.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/view.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/ex.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/ex.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/ex.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/ex.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/ex.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/ex.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/editor.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/editor.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/editor.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/editor.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/editor.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group editor) doesn't exist
+Setting up libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Setting up cmake (3.10.2-1ubuntu2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+[91m--2019-02-07 05:59:35--  https://apt.llvm.org/llvm-snapshot.gpg.key
+[0m[91mResolving apt.llvm.org (apt.llvm.org)... [0m[91mWarning: apt-key output should not be parsed (stdout is not a terminal)
+[0m[91m151.101.54.49, 2a04:4e42:d::561
+Connecting to apt.llvm.org (apt.llvm.org)|151.101.54.49|:443... [0m[91mconnected.
+[0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
+Length: 3145 (3.1K) [application/octet-stream]
+Saving to: 'STDOUT'
+
+     0K ...                                                   100% 69.7M=0s
+
+2019-02-07 05:59:36 (69.7 MB/s) - written to stdout [3145/3145]
+
+[0mOK
+Ign:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:2 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Hit:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release
+Hit:4 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release
+Hit:6 http://ports.ubuntu.com/ubuntu-ports bionic InRelease
+Hit:8 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease
+Hit:9 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease
+Hit:10 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+[91mE: Unable to locate package llvm-7-config
+[0mSending build context to Docker daemon  233.5kB
+Step 1/22 : FROM ibmcom/powerai:1.5.4-all-ubuntu18.04-py3
+ ---> 5fdfbb09ae06
+Step 2/22 : COPY app /app
+ ---> Using cache
+ ---> e95e9f8ad7fc
+Step 3/22 : WORKDIR /app
+ ---> Using cache
+ ---> 1678d9823f72
+Step 4/22 : USER root
+ ---> Using cache
+ ---> 5e365407d812
+Step 5/22 : RUN mkdir /root/.ssh && mkdir /home/pwrai/.ssh
+ ---> Using cache
+ ---> 5916363c1d48
+Step 6/22 : RUN mkdir -p /root/.jupyter && mkdir -p /home/pwrai/.jupyter && cp jupyter_notebook_config.py /root/.jupyter/ && cp jupyter_notebook_config.py /home/pwrai/.jupyter/
+ ---> Using cache
+ ---> 019f1bcc4775
+Step 7/22 : RUN chmod +x /app/ssh_key_copy.sh
+ ---> Using cache
+ ---> 7d50cfe97240
+Step 8/22 : RUN mkdir /run/sshd && mkdir /notebooks
+ ---> Using cache
+ ---> c65a4e6b6ed1
+Step 9/22 : COPY llvm-alternatives/llvm-alternatives /app
+ ---> Using cache
+ ---> 4eb6ea567ae3
+Step 10/22 : RUN apt-get update && apt-get install -y git vim cmake gfortran wget &&  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && apt-get update && apt-get install -y libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime
+ ---> Running in c84e7d185daa
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic InRelease [242 kB]
+Ign:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:3 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:5 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release [565 B]
+Get:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release.gpg [819 B]
+Get:7 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release.gpg [801 B]
+Get:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Packages [39.6 kB]
+Get:9 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Packages [4630 B]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease [88.7 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease [74.6 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease [88.7 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el Packages [10.9 MB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic/restricted ppc64el Packages [572 B]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic/multiverse ppc64el Packages [162 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el Packages [1284 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el Packages [535 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/restricted ppc64el Packages [580 B]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/multiverse ppc64el Packages [2208 B]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el Packages [769 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic-backports/universe ppc64el Packages [3655 B]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic-security/main ppc64el Packages [230 kB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports bionic-security/multiverse ppc64el Packages [1409 B]
+Get:24 http://ports.ubuntu.com/ubuntu-ports bionic-security/universe ppc64el Packages [133 kB]
+Fetched 14.6 MB in 8s (1880 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  cmake-data gfortran-7 git-man less libarchive13 libcurl3-gnutls
+  liberror-perl libgfortran-7-dev libgfortran4 libgpm2 libjsoncpp1 liblzo2-2
+  librhash0 libuv1 vim-common vim-runtime xxd
+Suggested packages:
+  cmake-doc ninja-build gfortran-doc gfortran-7-doc libgfortran4-dbg
+  libcoarrays-dev gettext-base git-daemon-run | git-daemon-sysvinit git-doc
+  git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn lrzip gpm
+  ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  cmake cmake-data gfortran gfortran-7 git git-man less libarchive13
+  libcurl3-gnutls liberror-perl libgfortran-7-dev libgfortran4 libgpm2
+  libjsoncpp1 liblzo2-2 librhash0 libuv1 vim vim-common vim-runtime wget xxd
+0 upgraded, 22 newly installed, 0 to remove and 80 not upgraded.
+Need to get 26.6 MB of archives.
+After this operation, 151 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liblzo2-2 ppc64el 2.08-1.2 [67.2 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el less ppc64el 487-0.1 [130 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el xxd ppc64el 2:8.0.1453-1ubuntu1 [49.2 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-common all 2:8.0.1453-1ubuntu1 [70.4 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el wget ppc64el 1.19.4-1ubuntu2.1 [330 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake-data all 3.10.2-1ubuntu2 [1331 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libarchive13 ppc64el 3.2.2-3.1ubuntu0.2 [352 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjsoncpp1 ppc64el 1.7.4-3 [79.0 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el librhash0 ppc64el 1.3.6-2 [81.8 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libuv1 ppc64el 1.18.0-3 [63.6 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el cmake ppc64el 3.10.2-1ubuntu2 [3548 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran4 ppc64el 7.3.0-27ubuntu1~18.04 [293 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libgfortran-7-dev ppc64el 7.3.0-27ubuntu1~18.04 [348 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran-7 ppc64el 7.3.0-27ubuntu1~18.04 [6670 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el gfortran ppc64el 4:7.3.0-3ubuntu2.1 [1348 B]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libcurl3-gnutls ppc64el 7.58.0-2ubuntu3.6 [217 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el liberror-perl all 0.17025-1 [22.8 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git-man all 1:2.17.1-1ubuntu0.4 [803 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el git ppc64el 1:2.17.1-1ubuntu0.4 [5314 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libgpm2 ppc64el 1.20.7-5 [15.8 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim-runtime all 2:8.0.1453-1ubuntu1 [5437 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el vim ppc64el 2:8.0.1453-1ubuntu1 [1355 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 26.6 MB in 10s (2662 kB/s)
+Selecting previously unselected package liblzo2-2:ppc64el.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 58477 files and directories currently installed.)
+Preparing to unpack .../00-liblzo2-2_2.08-1.2_ppc64el.deb ...
+Unpacking liblzo2-2:ppc64el (2.08-1.2) ...
+Selecting previously unselected package less.
+Preparing to unpack .../01-less_487-0.1_ppc64el.deb ...
+Unpacking less (487-0.1) ...
+Selecting previously unselected package xxd.
+Preparing to unpack .../02-xxd_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking xxd (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../03-vim-common_2%3a8.0.1453-1ubuntu1_all.deb ...
+Unpacking vim-common (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../04-wget_1.19.4-1ubuntu2.1_ppc64el.deb ...
+Unpacking wget (1.19.4-1ubuntu2.1) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../05-cmake-data_3.10.2-1ubuntu2_all.deb ...
+Unpacking cmake-data (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libarchive13:ppc64el.
+Preparing to unpack .../06-libarchive13_3.2.2-3.1ubuntu0.2_ppc64el.deb ...
+Unpacking libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Selecting previously unselected package libjsoncpp1:ppc64el.
+Preparing to unpack .../07-libjsoncpp1_1.7.4-3_ppc64el.deb ...
+Unpacking libjsoncpp1:ppc64el (1.7.4-3) ...
+Selecting previously unselected package librhash0:ppc64el.
+Preparing to unpack .../08-librhash0_1.3.6-2_ppc64el.deb ...
+Unpacking librhash0:ppc64el (1.3.6-2) ...
+Selecting previously unselected package libuv1:ppc64el.
+Preparing to unpack .../09-libuv1_1.18.0-3_ppc64el.deb ...
+Unpacking libuv1:ppc64el (1.18.0-3) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../10-cmake_3.10.2-1ubuntu2_ppc64el.deb ...
+Unpacking cmake (3.10.2-1ubuntu2) ...
+Selecting previously unselected package libgfortran4:ppc64el.
+Preparing to unpack .../11-libgfortran4_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package libgfortran-7-dev:ppc64el.
+Preparing to unpack .../12-libgfortran-7-dev_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran-7.
+Preparing to unpack .../13-gfortran-7_7.3.0-27ubuntu1~18.04_ppc64el.deb ...
+Unpacking gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Selecting previously unselected package gfortran.
+Preparing to unpack .../14-gfortran_4%3a7.3.0-3ubuntu2.1_ppc64el.deb ...
+Unpacking gfortran (4:7.3.0-3ubuntu2.1) ...
+Selecting previously unselected package libcurl3-gnutls:ppc64el.
+Preparing to unpack .../15-libcurl3-gnutls_7.58.0-2ubuntu3.6_ppc64el.deb ...
+Unpacking libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../16-liberror-perl_0.17025-1_all.deb ...
+Unpacking liberror-perl (0.17025-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../17-git-man_1%3a2.17.1-1ubuntu0.4_all.deb ...
+Unpacking git-man (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package git.
+Preparing to unpack .../18-git_1%3a2.17.1-1ubuntu0.4_ppc64el.deb ...
+Unpacking git (1:2.17.1-1ubuntu0.4) ...
+Selecting previously unselected package libgpm2:ppc64el.
+Preparing to unpack .../19-libgpm2_1.20.7-5_ppc64el.deb ...
+Unpacking libgpm2:ppc64el (1.20.7-5) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../20-vim-runtime_2%3a8.0.1453-1ubuntu1_all.deb ...
+Adding 'diversion of /usr/share/vim/vim80/doc/help.txt to /usr/share/vim/vim80/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim80/doc/tags to /usr/share/vim/vim80/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:8.0.1453-1ubuntu1) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../21-vim_2%3a8.0.1453-1ubuntu1_ppc64el.deb ...
+Unpacking vim (2:8.0.1453-1ubuntu1) ...
+Setting up git-man (1:2.17.1-1ubuntu0.4) ...
+Setting up less (487-0.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Processing triggers for mime-support (3.60ubuntu1) ...
+Setting up libgfortran4:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up xxd (2:8.0.1453-1ubuntu1) ...
+Setting up liberror-perl (0.17025-1) ...
+Setting up libgpm2:ppc64el (1.20.7-5) ...
+Setting up libuv1:ppc64el (1.18.0-3) ...
+Setting up libcurl3-gnutls:ppc64el (7.58.0-2ubuntu3.6) ...
+Setting up cmake-data (3.10.2-1ubuntu2) ...
+Setting up librhash0:ppc64el (1.3.6-2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Setting up libgfortran-7-dev:ppc64el (7.3.0-27ubuntu1~18.04) ...
+Setting up wget (1.19.4-1ubuntu2.1) ...
+Setting up vim-common (2:8.0.1453-1ubuntu1) ...
+Setting up gfortran-7 (7.3.0-27ubuntu1~18.04) ...
+Setting up vim-runtime (2:8.0.1453-1ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Setting up git (1:2.17.1-1ubuntu0.4) ...
+Setting up liblzo2-2:ppc64el (2.08-1.2) ...
+Setting up libjsoncpp1:ppc64el (1.7.4-3) ...
+Setting up gfortran (4:7.3.0-3ubuntu2.1) ...
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f95 (f95) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f95.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f95) doesn't exist
+update-alternatives: using /usr/bin/gfortran to provide /usr/bin/f77 (f77) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/f77.1.gz because associated file /usr/share/man/man1/gfortran.1.gz (of link group f77) doesn't exist
+Setting up vim (2:8.0.1453-1ubuntu1) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/vi.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/vi.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/vi.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/vi.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/vi.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/vi.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/view.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/view.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/view.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/view.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/view.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/ex.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/ex.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/ex.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/ex.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/ex.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/ex.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/editor.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/editor.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/editor.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/editor.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/editor.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group editor) doesn't exist
+Setting up libarchive13:ppc64el (3.2.2-3.1ubuntu0.2) ...
+Setting up cmake (3.10.2-1ubuntu2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+[91m--2019-02-07 07:11:31--  https://apt.llvm.org/llvm-snapshot.gpg.key
+[0m[91mResolving apt.llvm.org (apt.llvm.org)... [0m[91mWarning: apt-key output should not be parsed (stdout is not a terminal)
+[0m[91m151.101.54.49, 2a04:4e42:a::561
+Connecting to apt.llvm.org (apt.llvm.org)|151.101.54.49|:443... [0m[91mconnected.
+[0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
+Length: 3145[0m[91m (3.1K) [application/octet-stream]
+[0m[91mSaving to: 'STDOUT'
+
+     0K ..[0m[91m.               [0m[91m      [0m[91m      [0m[91m      [0m[91m      [0m[91m      [0m[91m      100%[0m[91m 40.9M=0s
+
+[0m[91m2019-02-07 07:11:32 (40.9 MB/s) - written to stdout [3145/3145]
+
+[0mOK
+Ign:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  InRelease
+Ign:2 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  InRelease
+Hit:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/ppc64el  Release
+Hit:4 https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/ppc64el  Release
+Hit:7 http://ports.ubuntu.com/ubuntu-ports bionic InRelease
+Hit:8 http://ports.ubuntu.com/ubuntu-ports bionic-updates InRelease
+Hit:9 http://ports.ubuntu.com/ubuntu-ports bionic-backports InRelease
+Hit:10 http://ports.ubuntu.com/ubuntu-ports bionic-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binfmt-support camlp4 file javascript-common ledit libcamlp4-ocaml-dev
+  libctypes-ocaml libctypes-ocaml-dev libffi-dev libfindlib-ocaml
+  libfindlib-ocaml-dev libjs-jquery libjs-underscore libmagic-mgc libmagic1
+  libncurses5-dev libpipeline1 libtinfo-dev ocaml-base-nox ocaml-compiler-libs
+  ocaml-findlib ocaml-interp ocaml-nox
+Suggested packages:
+  apache2 | lighttpd | httpd ncurses-doc ocaml-doc tuareg-mode | ocaml-mode
+The following NEW packages will be installed:
+  binfmt-support camlp4 file javascript-common ledit libcamlp4-ocaml-dev
+  libctypes-ocaml libctypes-ocaml-dev libffi-dev libfindlib-ocaml
+  libfindlib-ocaml-dev libjs-jquery libjs-underscore libllvm-7-ocaml-dev
+  libllvm7 libmagic-mgc libmagic1 libncurses5-dev libpipeline1 libtinfo-dev
+  llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime ocaml-base-nox
+  ocaml-compiler-libs ocaml-findlib ocaml-interp ocaml-nox
+0 upgraded, 30 newly installed, 0 to remove and 80 not upgraded.
+Need to get 123 MB of archives.
+After this operation, 709 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libmagic-mgc ppc64el 1:5.32-2ubuntu0.1 [184 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libmagic1 ppc64el 1:5.32-2ubuntu0.1 [76.7 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el file ppc64el 1:5.32-2ubuntu0.1 [22.7 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libpipeline1 ppc64el 1.5.0-1 [24.7 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el binfmt-support ppc64el 2.1.8-2 [60.1 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-base-nox ppc64el 4.05.0-10ubuntu1 [542 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libtinfo-dev ppc64el 6.1-1ubuntu1.18.04 [100 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libncurses5-dev ppc64el 6.1-1ubuntu1.18.04 [200 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-compiler-libs ppc64el 4.05.0-10ubuntu1 [18.9 MB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-interp ppc64el 4.05.0-10ubuntu1 [3465 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-nox ppc64el 4.05.0-10ubuntu1 [28.3 MB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libcamlp4-ocaml-dev ppc64el 4.05+1-2 [16.5 MB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el camlp4 ppc64el 4.05+1-2 [5730 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el javascript-common all 11 [6066 B]
+Get:15 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ledit all 2.03-6 [44.9 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libctypes-ocaml ppc64el 0.7.0-1build2 [230 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libctypes-ocaml-dev ppc64el 0.7.0-1build2 [571 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libfindlib-ocaml ppc64el 1.7.3-2 [166 kB]
+Get:19 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el libfindlib-ocaml-dev ppc64el 1.7.3-2 [149 kB]
+Get:20 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjs-jquery all 3.2.1-1 [152 kB]
+Get:21 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libjs-underscore all 1.8.3~dfsg-1 [59.9 kB]
+Get:22 http://ports.ubuntu.com/ubuntu-ports bionic-updates/main ppc64el libllvm7 ppc64el 1:7-3~ubuntu0.18.04.1 [14.9 MB]
+Get:23 http://ports.ubuntu.com/ubuntu-ports bionic/main ppc64el libffi-dev ppc64el 3.2.1-8 [163 kB]
+Get:24 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-runtime ppc64el 1:7-3~ubuntu0.18.04.1 [684 kB]
+Get:25 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7 ppc64el 1:7-3~ubuntu0.18.04.1 [4862 kB]
+Get:26 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-dev ppc64el 1:7-3~ubuntu0.18.04.1 [23.7 MB]
+Get:27 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el libllvm-7-ocaml-dev ppc64el 1:7-3~ubuntu0.18.04.1 [183 kB]
+Get:28 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-doc all 1:7-3~ubuntu0.18.04.1 [1995 kB]
+Get:29 http://ports.ubuntu.com/ubuntu-ports bionic-updates/universe ppc64el llvm-7-examples all 1:7-3~ubuntu0.18.04.1 [231 kB]
+Get:30 http://ports.ubuntu.com/ubuntu-ports bionic/universe ppc64el ocaml-findlib ppc64el 1.7.3-2 [395 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 123 MB in 37s (3301 kB/s)
+Selecting previously unselected package libmagic-mgc.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 63713 files and directories currently installed.)
+Preparing to unpack .../00-libmagic-mgc_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking libmagic-mgc (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package libmagic1:ppc64el.
+Preparing to unpack .../01-libmagic1_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking libmagic1:ppc64el (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package file.
+Preparing to unpack .../02-file_1%3a5.32-2ubuntu0.1_ppc64el.deb ...
+Unpacking file (1:5.32-2ubuntu0.1) ...
+Selecting previously unselected package libpipeline1:ppc64el.
+Preparing to unpack .../03-libpipeline1_1.5.0-1_ppc64el.deb ...
+Unpacking libpipeline1:ppc64el (1.5.0-1) ...
+Selecting previously unselected package binfmt-support.
+Preparing to unpack .../04-binfmt-support_2.1.8-2_ppc64el.deb ...
+Unpacking binfmt-support (2.1.8-2) ...
+Selecting previously unselected package ocaml-base-nox.
+Preparing to unpack .../05-ocaml-base-nox_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-base-nox (4.05.0-10ubuntu1) ...
+Selecting previously unselected package libtinfo-dev:ppc64el.
+Preparing to unpack .../06-libtinfo-dev_6.1-1ubuntu1.18.04_ppc64el.deb ...
+Unpacking libtinfo-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Selecting previously unselected package libncurses5-dev:ppc64el.
+Preparing to unpack .../07-libncurses5-dev_6.1-1ubuntu1.18.04_ppc64el.deb ...
+Unpacking libncurses5-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Selecting previously unselected package ocaml-compiler-libs.
+Preparing to unpack .../08-ocaml-compiler-libs_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-compiler-libs (4.05.0-10ubuntu1) ...
+Selecting previously unselected package ocaml-interp.
+Preparing to unpack .../09-ocaml-interp_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-interp (4.05.0-10ubuntu1) ...
+Selecting previously unselected package ocaml-nox.
+Preparing to unpack .../10-ocaml-nox_4.05.0-10ubuntu1_ppc64el.deb ...
+Unpacking ocaml-nox (4.05.0-10ubuntu1) ...
+Selecting previously unselected package libcamlp4-ocaml-dev.
+Preparing to unpack .../11-libcamlp4-ocaml-dev_4.05+1-2_ppc64el.deb ...
+Unpacking libcamlp4-ocaml-dev (4.05+1-2) ...
+Selecting previously unselected package camlp4.
+Preparing to unpack .../12-camlp4_4.05+1-2_ppc64el.deb ...
+Unpacking camlp4 (4.05+1-2) ...
+Selecting previously unselected package javascript-common.
+Preparing to unpack .../13-javascript-common_11_all.deb ...
+Unpacking javascript-common (11) ...
+Selecting previously unselected package ledit.
+Preparing to unpack .../14-ledit_2.03-6_all.deb ...
+Unpacking ledit (2.03-6) ...
+Selecting previously unselected package libctypes-ocaml.
+Preparing to unpack .../15-libctypes-ocaml_0.7.0-1build2_ppc64el.deb ...
+Unpacking libctypes-ocaml (0.7.0-1build2) ...
+Selecting previously unselected package libctypes-ocaml-dev.
+Preparing to unpack .../16-libctypes-ocaml-dev_0.7.0-1build2_ppc64el.deb ...
+Unpacking libctypes-ocaml-dev (0.7.0-1build2) ...
+Selecting previously unselected package libfindlib-ocaml.
+Preparing to unpack .../17-libfindlib-ocaml_1.7.3-2_ppc64el.deb ...
+Unpacking libfindlib-ocaml (1.7.3-2) ...
+Selecting previously unselected package libfindlib-ocaml-dev.
+Preparing to unpack .../18-libfindlib-ocaml-dev_1.7.3-2_ppc64el.deb ...
+Unpacking libfindlib-ocaml-dev (1.7.3-2) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../19-libjs-jquery_3.2.1-1_all.deb ...
+Unpacking libjs-jquery (3.2.1-1) ...
+Selecting previously unselected package libjs-underscore.
+Preparing to unpack .../20-libjs-underscore_1.8.3~dfsg-1_all.deb ...
+Unpacking libjs-underscore (1.8.3~dfsg-1) ...
+Selecting previously unselected package libllvm7:ppc64el.
+Preparing to unpack .../21-libllvm7_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking libllvm7:ppc64el (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package libffi-dev:ppc64el.
+Preparing to unpack .../22-libffi-dev_3.2.1-8_ppc64el.deb ...
+Unpacking libffi-dev:ppc64el (3.2.1-8) ...
+Selecting previously unselected package llvm-7-runtime.
+Preparing to unpack .../23-llvm-7-runtime_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7-runtime (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7.
+Preparing to unpack .../24-llvm-7_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7 (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-dev.
+Preparing to unpack .../25-llvm-7-dev_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking llvm-7-dev (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package libllvm-7-ocaml-dev.
+Preparing to unpack .../26-libllvm-7-ocaml-dev_1%3a7-3~ubuntu0.18.04.1_ppc64el.deb ...
+Unpacking libllvm-7-ocaml-dev (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-doc.
+Preparing to unpack .../27-llvm-7-doc_1%3a7-3~ubuntu0.18.04.1_all.deb ...
+Unpacking llvm-7-doc (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package llvm-7-examples.
+Preparing to unpack .../28-llvm-7-examples_1%3a7-3~ubuntu0.18.04.1_all.deb ...
+Unpacking llvm-7-examples (1:7-3~ubuntu0.18.04.1) ...
+Selecting previously unselected package ocaml-findlib.
+Preparing to unpack .../29-ocaml-findlib_1.7.3-2_ppc64el.deb ...
+Unpacking ocaml-findlib (1.7.3-2) ...
+Setting up libjs-jquery (3.2.1-1) ...
+Setting up libjs-underscore (1.8.3~dfsg-1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+Setting up libllvm7:ppc64el (1:7-3~ubuntu0.18.04.1) ...
+Setting up ocaml-base-nox (4.05.0-10ubuntu1) ...
+Setting up libtinfo-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Setting up libffi-dev:ppc64el (3.2.1-8) ...
+Setting up libpipeline1:ppc64el (1.5.0-1) ...
+Setting up libctypes-ocaml (0.7.0-1build2) ...
+Setting up libmagic-mgc (1:5.32-2ubuntu0.1) ...
+Setting up libmagic1:ppc64el (1:5.32-2ubuntu0.1) ...
+Setting up libncurses5-dev:ppc64el (6.1-1ubuntu1.18.04) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Setting up llvm-7-doc (1:7-3~ubuntu0.18.04.1) ...
+Setting up javascript-common (11) ...
+Setting up libfindlib-ocaml (1.7.3-2) ...
+Setting up ocaml-findlib (1.7.3-2) ...
+Setting up binfmt-support (2.1.8-2) ...
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+invoke-rc.d: could not determine current runlevel
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up ledit (2.03-6) ...
+update-alternatives: using /usr/bin/ledit to provide /usr/bin/readline-editor (readline-editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/readline-editor.1.gz because associated file /usr/share/man/man1/ledit.1.gz (of link group readline-editor) doesn't exist
+Setting up file (1:5.32-2ubuntu0.1) ...
+Setting up llvm-7-runtime (1:7-3~ubuntu0.18.04.1) ...
+update-binfmts: warning: Couldn't load the binfmt_misc module.
+Setting up llvm-7 (1:7-3~ubuntu0.18.04.1) ...
+Setting up llvm-7-dev (1:7-3~ubuntu0.18.04.1) ...
+Setting up llvm-7-examples (1:7-3~ubuntu0.18.04.1) ...
+Setting up ocaml-compiler-libs (4.05.0-10ubuntu1) ...
+Setting up ocaml-interp (4.05.0-10ubuntu1) ...
+Setting up ocaml-nox (4.05.0-10ubuntu1) ...
+Setting up libcamlp4-ocaml-dev (4.05+1-2) ...
+Setting up camlp4 (4.05+1-2) ...
+Setting up libctypes-ocaml-dev (0.7.0-1build2) ...
+Setting up libfindlib-ocaml-dev (1.7.3-2) ...
+Setting up libllvm-7-ocaml-dev (1:7-3~ubuntu0.18.04.1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Removing intermediate container c84e7d185daa
+ ---> 840f17931a55
+Step 11/22 : ARG PATH=/opt/anaconda3/bin/:$PATH
+ ---> Running in dc6ae0a88def
+Removing intermediate container dc6ae0a88def
+ ---> 8803a09ed89e
+Step 12/22 : ENV PATH=/opt/anaconda3/bin/:$PATH
+ ---> Running in 1ccad656ee2a
+Removing intermediate container 1ccad656ee2a
+ ---> 8f6c4cc425e4
+Step 13/22 : ARG LICENSE=yes
+ ---> Running in 5e2c06117163
+Removing intermediate container 5e2c06117163
+ ---> 3a6d3ae86ba4
+Step 14/22 : ENV LICENSE=yes
+ ---> Running in b5b74c92615f
+Removing intermediate container b5b74c92615f
+ ---> bd4c1cee1906
+Step 15/22 : SHELL ["/bin/bash", "-c"]
+ ---> Running in 1e802a4c321c
+Removing intermediate container 1e802a4c321c
+ ---> 76318fdb9534
+Step 16/22 : RUN cp /usr/bin/make /usr/bin/make.orig && echo "#!/bin/bash" >> /usr/bin/make && echo  "make -j 128 $1" >> /usr/bin/make && chmod +x /usr/bin/make
+ ---> Running in 4ae90f130d95
+Removing intermediate container 4ae90f130d95
+ ---> 51fe3556011d
+Step 17/22 : RUN echo "Status=9" > /opt/DL/license/lap_se/license/status.dat
+ ---> Running in 7e2171bdfada
+Removing intermediate container 7e2171bdfada
+ ---> 1568357d5c59
+Step 18/22 : RUN /opt/anaconda3/bin/conda install -y llvmlite &&     source /opt/DL/tensorflow/bin/tensorflow-activate &&      source /opt/DL/pytorch/bin/pytorch-activate &&  /opt/anaconda3/bin/pip install -e git+https://github.com/adamjm/autokeras.git#egg=autokeras
+ ---> Running in dd1264253977
+Solving environment: ...working... done
+[91mpython-3.6.8         | 34.9 MB   |            |   0% [0m[91mpython-3.6.8         | 34.9 MB   |            |   0% [0m[91mpython-3.6.8         | 34.9 MB   |            |   1% [0m[91mpython-3.6.8         | 34.9 MB   | 1          |   2% [0m[91mpython-3.6.8         | 34.9 MB   | 2          |   2% [0m[91mpython-3.6.8         | 34.9 MB   | 3          |   3% [0m[91mpython-3.6.8         | 34.9 MB   | 3          |   4% [0m[91mpython-3.6.8         | 34.9 MB   | 4          |   5% [0m[91mpython-3.6.8         | 34.9 MB   | 5          |   5% [0m[91mpython-3.6.8         | 34.9 MB   | 6          |   6% [0m[91mpython-3.6.8         | 34.9 MB   | 6          |   7% [0m[91mpython-3.6.8         | 34.9 MB   | 7          |   8% [0m[91mpython-3.6.8         | 34.9 MB   | 8          |   8% [0m[91mpython-3.6.8         | 34.9 MB   | 9          |   9% [0m[91mpython-3.6.8         | 34.9 MB   | 9          |  10% [0m[91mpython-3.6.8         | 34.9 MB   | #          |  11% [0m[91mpython-3.6.8         | 34.9 MB   | #1         |  11% [0m[91mpython-3.6.8         | 34.9 MB   | #2         |  12% [0m[91mpython-3.6.8         | 34.9 MB   | #2         |  13% [0m[91mpython-3.6.8         | 34.9 MB   | #3         |  14% [0m[91mpython-3.6.8         | 34.9 MB   | #4         |  14% [0m[91mpython-3.6.8         | 34.9 MB   | #5         |  15% [0m[91mpython-3.6.8         | 34.9 MB   | #5         |  16% [0m[91mpython-3.6.8         | 34.9 MB   | #6         |  17% [0m[91mpython-3.6.8         | 34.9 MB   | #7         |  17% [0m[91mpython-3.6.8         | 34.9 MB   | #8         |  18% [0m[91mpython-3.6.8         | 34.9 MB   | #8         |  19% [0m[91mpython-3.6.8         | 34.9 MB   | #9         |  20% [0m[91mpython-3.6.8         | 34.9 MB   | ##         |  20% [0m[91mpython-3.6.8         | 34.9 MB   | ##1        |  21% [0m[91mpython-3.6.8         | 34.9 MB   | ##1        |  22% [0m[91mpython-3.6.8         | 34.9 MB   | ##2        |  23% [0m[91mpython-3.6.8         | 34.9 MB   | ##3        |  23% [0m[91mpython-3.6.8         | 34.9 MB   | ##4        |  24% [0m[91mpython-3.6.8         | 34.9 MB   | ##4        |  25% [0m[91mpython-3.6.8         | 34.9 MB   | ##5        |  26% [0m[91mpython-3.6.8         | 34.9 MB   | ##6        |  26% [0m[91mpython-3.6.8         | 34.9 MB   | ##6        |  27% [0m[91mpython-3.6.8         | 34.9 MB   | ##7        |  28% [0m[91mpython-3.6.8         | 34.9 MB   | ##8        |  28% [0m[91mpython-3.6.8         | 34.9 MB   | ##9        |  29% [0m[91mpython-3.6.8         | 34.9 MB   | ##9        |  30% [0m[91mpython-3.6.8         | 34.9 MB   | ###        |  31% [0m[91mpython-3.6.8         | 34.9 MB   | ###1       |  31% [0m[91mpython-3.6.8         | 34.9 MB   | ###2       |  32% [0m[91mpython-3.6.8         | 34.9 MB   | ###2       |  33% [0m[91mpython-3.6.8         | 34.9 MB   | ###3       |  34% [0m[91mpython-3.6.8         | 34.9 MB   | ###4       |  34% [0m[91mpython-3.6.8         | 34.9 MB   | ###5       |  35% [0m[91mpython-3.6.8         | 34.9 MB   | ###5       |  36% [0m[91mpython-3.6.8         | 34.9 MB   | ###6       |  37% [0m[91mpython-3.6.8         | 34.9 MB   | ###7       |  37% [0m[91mpython-3.6.8         | 34.9 MB   | ###8       |  38% [0m[91mpython-3.6.8         | 34.9 MB   | ###8       |  39% [0m[91mpython-3.6.8         | 34.9 MB   | ###9       |  40% [0m[91mpython-3.6.8         | 34.9 MB   | ####       |  40% [0m[91mpython-3.6.8         | 34.9 MB   | ####1      |  41% [0m[91mpython-3.6.8         | 34.9 MB   | ####1      |  42% [0m[91mpython-3.6.8         | 34.9 MB   | ####2      |  43% [0m[91mpython-3.6.8         | 34.9 MB   | ####3      |  43% [0m[91mpython-3.6.8         | 34.9 MB   | ####3      |  44% [0m[91mpython-3.6.8         | 34.9 MB   | ####4      |  45% [0m[91mpython-3.6.8         | 34.9 MB   | ####5      |  45% [0m[91mpython-3.6.8         | 34.9 MB   | ####6      |  46% [0m[91mpython-3.6.8         | 34.9 MB   | ####6      |  47% [0m[91mpython-3.6.8         | 34.9 MB   | ####7      |  48% [0m[91mpython-3.6.8         | 34.9 MB   | ####8      |  48% [0m[91mpython-3.6.8         | 34.9 MB   | ####9      |  49% [0m[91mpython-3.6.8         | 34.9 MB   | ####9      |  50% [0m[91mpython-3.6.8         | 34.9 MB   | #####      |  51% [0m[91mpython-3.6.8         | 34.9 MB   | #####1     |  51% [0m[91mpython-3.6.8         | 34.9 MB   | #####2     |  52% [0m[91mpython-3.6.8         | 34.9 MB   | #####3     |  53% [0m[91mpython-3.6.8         | 34.9 MB   | #####3     |  54% [0m[91mpython-3.6.8         | 34.9 MB   | #####4     |  55% [0m[91mpython-3.6.8         | 34.9 MB   | #####5     |  55% [0m[91mpython-3.6.8         | 34.9 MB   | #####5     |  56% [0m[91mpython-3.6.8         | 34.9 MB   | #####6     |  57% [0m[91mpython-3.6.8         | 34.9 MB   | #####7     |  57% [0m[91mpython-3.6.8         | 34.9 MB   | #####8     |  58% [0m[91mpython-3.6.8         | 34.9 MB   | #####8     |  59% [0m[91mpython-3.6.8         | 34.9 MB   | #####9     |  60% [0m[91mpython-3.6.8         | 34.9 MB   | ######     |  60% [0m[91mpython-3.6.8         | 34.9 MB   | ######1    |  61% [0m[91mpython-3.6.8         | 34.9 MB   | ######1    |  62% [0m[91mpython-3.6.8         | 34.9 MB   | ######2    |  63% [0m[91mpython-3.6.8         | 34.9 MB   | ######3    |  63% [0m[91mpython-3.6.8         | 34.9 MB   | ######4    |  64% [0m[91mpython-3.6.8         | 34.9 MB   | ######4    |  65% [0m[91mpython-3.6.8         | 34.9 MB   | ######5    |  66% [0m[91mpython-3.6.8         | 34.9 MB   | ######6    |  66% [0m[91mpython-3.6.8         | 34.9 MB   | ######7    |  67% [0m[91mpython-3.6.8         | 34.9 MB   | ######7    |  68% [0m[91mpython-3.6.8         | 34.9 MB   | ######8    |  69% [0m[91mpython-3.6.8         | 34.9 MB   | ######9    |  69% [0m[91mpython-3.6.8         | 34.9 MB   | #######    |  70% [0m[91mpython-3.6.8         | 34.9 MB   | #######    |  71% [0m[91mpython-3.6.8         | 34.9 MB   | #######1   |  72% [0m[91mpython-3.6.8         | 34.9 MB   | #######2   |  72% [0m[91mpython-3.6.8         | 34.9 MB   | #######2   |  73% [0m[91mpython-3.6.8         | 34.9 MB   | #######3   |  74% [0m[91mpython-3.6.8         | 34.9 MB   | #######4   |  74% [0m[91mpython-3.6.8         | 34.9 MB   | #######5   |  75% [0m[91mpython-3.6.8         | 34.9 MB   | #######5   |  76% [0m[91mpython-3.6.8         | 34.9 MB   | #######6   |  76% [0m[91mpython-3.6.8         | 34.9 MB   | #######6   |  77% [0m[91mpython-3.6.8         | 34.9 MB   | #######7   |  77% [0m[91mpython-3.6.8         | 34.9 MB   | #######8   |  78% [0m[91mpython-3.6.8         | 34.9 MB   | #######8   |  79% [0m[91mpython-3.6.8         | 34.9 MB   | #######9   |  79% [0m[91mpython-3.6.8         | 34.9 MB   | #######9   |  79% [0m[91mpython-3.6.8         | 34.9 MB   | #######9   |  80% [0m[91mpython-3.6.8         | 34.9 MB   | ########   |  80% [0m[91mpython-3.6.8         | 34.9 MB   | ########   |  81% [0m[91mpython-3.6.8         | 34.9 MB   | ########1  |  81% [0m[91mpython-3.6.8         | 34.9 MB   | ########1  |  82% [0m[91mpython-3.6.8         | 34.9 MB   | ########2  |  82% [0m[91mpython-3.6.8         | 34.9 MB   | ########2  |  83% [0m[91mpython-3.6.8         | 34.9 MB   | ########3  |  83% [0m[91mpython-3.6.8         | 34.9 MB   | ########3  |  84% [0m[91mpython-3.6.8         | 34.9 MB   | ########3  |  84% [0m[91mpython-3.6.8         | 34.9 MB   | ########4  |  84% [0m[91mpython-3.6.8         | 34.9 MB   | ########4  |  85% [0m[91mpython-3.6.8         | 34.9 MB   | ########5  |  85% [0m[91mpython-3.6.8         | 34.9 MB   | ########5  |  85% [0m[91mpython-3.6.8         | 34.9 MB   | ########5  |  86% [0m[91mpython-3.6.8         | 34.9 MB   | ########6  |  86% [0m[91mpython-3.6.8         | 34.9 MB   | ########6  |  87% [0m[91mpython-3.6.8         | 34.9 MB   | ########7  |  87% [0m[91mpython-3.6.8         | 34.9 MB   | ########8  |  88% [0m[91mpython-3.6.8         | 34.9 MB   | ########8  |  89% [0m[91mpython-3.6.8         | 34.9 MB   | ########9  |  90% [0m[91mpython-3.6.8         | 34.9 MB   | #########  |  90% [0m[91mpython-3.6.8         | 34.9 MB   | #########1 |  91% [0m[91mpython-3.6.8         | 34.9 MB   | #########1 |  92% [0m[91mpython-3.6.8         | 34.9 MB   | #########2 |  93% [0m[91mpython-3.6.8         | 34.9 MB   | #########3 |  93% [0m[91mpython-3.6.8         | 34.9 MB   | #########4 |  94% [0m[91mpython-3.6.8         | 34.9 MB   | #########4 |  95% [0m[91mpython-3.6.8         | 34.9 MB   | #########5 |  96% [0m[91mpython-3.6.8         | 34.9 MB   | #########6 |  96% [0m[91mpython-3.6.8         | 34.9 MB   | #########7 |  97% [0m[91mpython-3.6.8         | 34.9 MB   | #########8 |  98% [0m[91mpython-3.6.8         | 34.9 MB   | #########8 |  99% [0m[91mpython-3.6.8         | 34.9 MB   | #########9 | 100% [0m[91mpython-3.6.8         | 34.9 MB   | ########## | 100% [0m[91m
+curl-7.63.0          | 79 KB     |            |   0% [0m[91mcurl-7.63.0          | 79 KB     | #5         |  15% [0m[91mcurl-7.63.0          | 79 KB     | ########## | 100% [0m[91m
+conda-4.6.2          | 1.7 MB    |            |   0% [0m[91mconda-4.6.2          | 1.7 MB    | #4         |  14% [0m[91mconda-4.6.2          | 1.7 MB    | ###1       |  31% [0m[91mconda-4.6.2          | 1.7 MB    | ####7      |  48% [0m[91mconda-4.6.2          | 1.7 MB    | ######3    |  63% [0m[91mconda-4.6.2          | 1.7 MB    | #######7   |  78% [0m[91mconda-4.6.2          | 1.7 MB    | ########8  |  89% [0m[91mconda-4.6.2          | 1.7 MB    | #########8 |  98% [0m[91mconda-4.6.2          | 1.7 MB    | ########## | 100% [0m[91m
+sqlite-3.26.0        | 2.3 MB    |            |   0% [0m[91msqlite-3.26.0        | 2.3 MB    | #          |  11% [0m[91msqlite-3.26.0        | 2.3 MB    | ##3        |  23% [0m[91msqlite-3.26.0        | 2.3 MB    | ###5       |  35% [0m[91msqlite-3.26.0        | 2.3 MB    | ####6      |  47% [0m[91msqlite-3.26.0        | 2.3 MB    | #####8     |  58% [0m[91msqlite-3.26.0        | 2.3 MB    | ######9    |  70% [0m[91msqlite-3.26.0        | 2.3 MB    | #######9   |  80% [0m[91msqlite-3.26.0        | 2.3 MB    | ########9  |  90% [0m[91msqlite-3.26.0        | 2.3 MB    | #########8 |  99% [0m[91msqlite-3.26.0        | 2.3 MB    | ########## | 100% [0m[91m
+certifi-2018.11.29   | 145 KB    |            |   0% [0m[91mcertifi-2018.11.29   | 145 KB    | ########## | 100% [0m[91m
+cryptography-2.4.2   | 568 KB    |            |   0% [0m[91mcryptography-2.4.2   | 568 KB    | ####4      |  44% [0m[91mcryptography-2.4.2   | 568 KB    | ########1  |  81% [0m[91mcryptography-2.4.2   | 568 KB    | ########## | 100% [0m[91m
+ca-certificates-2019 | 126 KB    |            |   0% [0m[91mca-certificates-2019 | 126 KB    | ########## | 100% [0m[91m
+krb5-1.16.1          | 1.5 MB    |            |   0% [0m[91mkrb5-1.16.1          | 1.5 MB    | #6         |  17% [0m[91mkrb5-1.16.1          | 1.5 MB    | ###5       |  36% [0m[91mkrb5-1.16.1          | 1.5 MB    | #####4     |  54% [0m[91mkrb5-1.16.1          | 1.5 MB    | #######1   |  72% [0m[91mkrb5-1.16.1          | 1.5 MB    | ########5  |  85% [0m[91mkrb5-1.16.1          | 1.5 MB    | #########7 |  97% [0m[91mkrb5-1.16.1          | 1.5 MB    | ########## | 100% [0m[91m
+openssl-1.1.1a       | 5.0 MB    |            |   0% [0m[91mopenssl-1.1.1a       | 5.0 MB    | 4          |   5% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #          |  11% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #5         |  16% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ##1        |  21% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ##6        |  26% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ###1       |  31% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ###6       |  37% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ####1      |  42% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ####6      |  47% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #####2     |  52% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #####7     |  57% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ######2    |  62% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ######7    |  68% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #######2   |  73% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #######7   |  78% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ########1  |  82% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ########5  |  85% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ########8  |  88% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #########1 |  91% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #########4 |  94% [0m[91mopenssl-1.1.1a       | 5.0 MB    | #########7 |  98% [0m[91mopenssl-1.1.1a       | 5.0 MB    | ########## | 100% [0m[91m
+pycurl-7.43.0.2      | 187 KB    |            |   0% [0m[91mpycurl-7.43.0.2      | 187 KB    | ########## | 100% [0m[91m
+grpcio-1.16.1        | 1.1 MB    |            |   0% [0m[91mgrpcio-1.16.1        | 1.1 MB    | ##2        |  22% [0m[91mgrpcio-1.16.1        | 1.1 MB    | ####7      |  48% [0m[91mgrpcio-1.16.1        | 1.1 MB    | #######1   |  72% [0m[91mgrpcio-1.16.1        | 1.1 MB    | ########7  |  87% [0m[91mgrpcio-1.16.1        | 1.1 MB    | ########## | 100% [0m[91m
+libcurl-7.63.0       | 636 KB    |            |   0% [0m[91mlibcurl-7.63.0       | 636 KB    | ###7       |  38% [0m[91mlibcurl-7.63.0       | 636 KB    | ########3  |  83% [0m[91mlibcurl-7.63.0       | 636 KB    | ########## | 100% [0m[91m
+llvmlite-0.27.0      | 14.5 MB   |            |   0% [0m[91mllvmlite-0.27.0      | 14.5 MB   |            |   0% [0m[91mllvmlite-0.27.0      | 14.5 MB   |            |   0% [0m[91mllvmlite-0.27.0      | 14.5 MB   |            |   0% [0m[91mllvmlite-0.27.0      | 14.5 MB   |            |   1% [0m[91mllvmlite-0.27.0      | 14.5 MB   |            |   1% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 1          |   1% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 1          |   2% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 2          |   3% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 3          |   4% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 5          |   5% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 5          |   6% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 7          |   7% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 8          |   8% [0m[91mllvmlite-0.27.0      | 14.5 MB   | 9          |   9% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #          |  10% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #1         |  11% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #2         |  12% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #3         |  13% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #4         |  15% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #6         |  17% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #8         |  19% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##         |  20% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##2        |  22% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##3        |  24% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##5        |  26% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##7        |  28% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ##9        |  29% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###1       |  31% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###2       |  33% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###4       |  35% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###6       |  36% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###8       |  38% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ###9       |  40% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ####1      |  42% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ####3      |  44% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ####5      |  45% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ####7      |  47% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ####8      |  49% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####      |  51% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####2     |  52% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####4     |  54% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####6     |  56% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####7     |  58% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #####9     |  60% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ######1    |  61% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ######3    |  63% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ######4    |  65% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ######6    |  67% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ######8    |  68% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######    |  70% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######2   |  72% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######3   |  74% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######5   |  76% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######7   |  77% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #######8   |  79% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########   |  80% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########1  |  82% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########2  |  83% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########4  |  84% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########5  |  85% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########6  |  87% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########7  |  88% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########9  |  89% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########  |  90% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########1 |  92% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########2 |  93% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########3 |  94% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########4 |  95% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########6 |  96% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########7 |  97% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########8 |  98% [0m[91mllvmlite-0.27.0      | 14.5 MB   | #########9 |  99% [0m[91mllvmlite-0.27.0      | 14.5 MB   | ########## | 100% [0m
+## Package Plan ##
+
+  environment location: /opt/anaconda3
+
+  added / updated specs: 
+    - llvmlite
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    python-3.6.8               |       h4134adf_0        34.9 MB
+    curl-7.63.0                |    hbc83047_1000          79 KB
+    conda-4.6.2                |           py36_0         1.7 MB
+    sqlite-3.26.0              |       h7b6447c_0         2.3 MB
+    certifi-2018.11.29         |           py36_0         145 KB
+    cryptography-2.4.2         |   py36h1ba5d50_0         568 KB
+    ca-certificates-2019.1.23  |                0         126 KB
+    krb5-1.16.1                |       h597af5e_7         1.5 MB
+    openssl-1.1.1a             |       h7b6447c_0         5.0 MB
+    pycurl-7.43.0.2            |   py36h1ba5d50_0         187 KB
+    grpcio-1.16.1              |   py36hf8bcb03_1         1.1 MB
+    libcurl-7.63.0             |    h20c2e04_1000         636 KB
+    llvmlite-0.27.0            |   py36hd408876_0        14.5 MB
+    ------------------------------------------------------------
+                                           Total:        62.5 MB
+
+The following NEW packages will be INSTALLED:
+
+    krb5:            1.16.1-h597af5e_7    
+    libcurl:         7.63.0-h20c2e04_1000 
+    llvmlite:        0.27.0-py36hd408876_0
+
+The following packages will be UPDATED:
+
+    ca-certificates: 2018.03.07-hf82bc7d_0 --> 2019.1.23-0            
+    certifi:         2018.10.15-py36_0     --> 2018.11.29-py36_0      
+    conda:           4.5.11-py36_0         --> 4.6.2-py36_0           
+    cryptography:    2.2.2-py36hb7f436b_0  --> 2.4.2-py36h1ba5d50_0   
+    curl:            7.55.1-hb9fc6fc_4     --> 7.63.0-hbc83047_1000   
+    grpcio:          1.14.1-py36h9ba97e2_0 --> 1.16.1-py36hf8bcb03_1  
+    openssl:         1.0.2p-h14c3975_0     --> 1.1.1a-h7b6447c_0      
+    pycurl:          7.43.0-py36hb7f436b_3 --> 7.43.0.2-py36h1ba5d50_0
+    python:          3.6.5-hc3d631a_2      --> 3.6.8-h4134adf_0       
+    sqlite:          3.23.1-he433501_0     --> 3.26.0-h7b6447c_0      
+
+
+Downloading and Extracting Packages
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+[91m
+[0mObtaining autokeras from git+https://github.com/adamjm/autokeras.git#egg=autokeras
+  Cloning https://github.com/adamjm/autokeras.git to ./src/autokeras
+Requirement already satisfied: scipy in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (1.1.0)
+Requirement already satisfied: torch==1.0.0 in /opt/DL/pytorch/lib/python3.6/site-packages (from autokeras) (1.0.0)
+Requirement already satisfied: torchvision==0.2.1 in /opt/DL/pytorch/lib/python3.6/site-packages (from autokeras) (0.2.1)
+Requirement already satisfied: numpy in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (1.14.3)
+Collecting keras==2.2.4 (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/5e/10/aa32dad071ce52b5502266b5c659451cfd6ffcbf14e6c8c4f16c0ff5aaab/Keras-2.2.4-py2.py3-none-any.whl (312kB)
+Requirement already satisfied: scikit-learn in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (0.19.1)
+Requirement already satisfied: scikit-image in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (0.13.1)
+Requirement already satisfied: tqdm in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (4.28.1)
+Requirement already satisfied: tensorflow==1.12.0 in /opt/DL/tensorflow/lib/python3.6/site-packages (from autokeras) (1.12.0)
+Requirement already satisfied: imageio in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (2.2.0)
+Requirement already satisfied: requests in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (2.18.4)
+Collecting lightgbm (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/c9/ce/3aff55e25e282383c19c5a5fb7387fd400e64b1a1036671aefa63ceeaaf4/lightgbm-2.2.3.tar.gz (649kB)
+Requirement already satisfied: pandas in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (0.23.0)
+Collecting librosa (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/09/b4/5b411f19de48f8fc1a0ff615555aa9124952e4156e94d4803377e50cfa4c/librosa-0.6.2.tar.gz (1.6MB)
+Collecting numba (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/02/a8/d0eeaf9a21dc3df1c0c53e02dc5dc92e3a32422e69c2071958b1983cf835/numba-0.42.0.tar.gz (1.6MB)
+Collecting inflect (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/86/02/e6b11020a9c37d25b4767a1d0af5835629f6e75d6f51553ad07a4c73dc31/inflect-2.1.0-py2.py3-none-any.whl (40kB)
+Collecting unidecode (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/31/39/53096f9217b057cb049fe872b7fc7ce799a1a89b76cf917d9639e7a558b5/Unidecode-1.0.23-py2.py3-none-any.whl (237kB)
+Requirement already satisfied: nltk in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (3.3)
+Collecting lws (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/3a/c7/856af2e1202e7a4c5102406196aa661edb402256e7ce2334be0c0d8afa2e/lws-1.2.tar.gz (133kB)
+Collecting boto3 (from autokeras)
+  Downloading https://files.pythonhosted.org/packages/f7/7f/660e67d5221364547d93d00ba03c337b2e88dc45270f020b82a47ef677c7/boto3-1.9.89-py2.py3-none-any.whl (128kB)
+Requirement already satisfied: pillow>=4.1.1 in /opt/anaconda3/lib/python3.6/site-packages (from torchvision==0.2.1->autokeras) (5.3.0)
+Requirement already satisfied: six in /opt/anaconda3/lib/python3.6/site-packages (from torchvision==0.2.1->autokeras) (1.11.0)
+Requirement already satisfied: h5py in /opt/anaconda3/lib/python3.6/site-packages (from keras==2.2.4->autokeras) (2.8.0)
+Requirement already satisfied: keras-applications>=1.0.6 in /opt/anaconda3/lib/python3.6/site-packages (from keras==2.2.4->autokeras) (1.0.6)
+Requirement already satisfied: keras-preprocessing>=1.0.5 in /opt/anaconda3/lib/python3.6/site-packages (from keras==2.2.4->autokeras) (1.0.5)
+Requirement already satisfied: pyyaml in /opt/anaconda3/lib/python3.6/site-packages (from keras==2.2.4->autokeras) (3.12)
+Requirement already satisfied: matplotlib>=1.3.1 in /opt/anaconda3/lib/python3.6/site-packages (from scikit-image->autokeras) (3.0.0)
+Requirement already satisfied: networkx>=1.8 in /opt/anaconda3/lib/python3.6/site-packages (from scikit-image->autokeras) (2.2)
+Requirement already satisfied: PyWavelets>=0.4.0 in /opt/anaconda3/lib/python3.6/site-packages (from scikit-image->autokeras) (0.5.2)
+Requirement already satisfied: termcolor>=1.1.0 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (1.1.0)
+Collecting tensorboard<1.13.0,>=1.12.0 (from tensorflow==1.12.0->autokeras)
+  Downloading https://files.pythonhosted.org/packages/07/53/8d32ce9471c18f8d99028b7cef2e5b39ea8765bd7ef250ca05b490880971/tensorboard-1.12.2-py3-none-any.whl (3.0MB)
+Requirement already satisfied: protobuf>=3.6.1 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (3.6.1)
+Requirement already satisfied: gast>=0.2.0 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (0.2.0)
+Requirement already satisfied: astor>=0.6.0 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (0.7.1)
+Requirement already satisfied: toposort>=1.5.0 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (1.5)
+Requirement already satisfied: wheel>=0.26 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (0.31.1)
+Requirement already satisfied: grpcio>=1.8.6 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (1.16.1)
+Requirement already satisfied: absl-py>=0.1.6 in /opt/anaconda3/lib/python3.6/site-packages (from tensorflow==1.12.0->autokeras) (0.6.1)
+Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /opt/anaconda3/lib/python3.6/site-packages (from requests->autokeras) (3.0.4)
+Requirement already satisfied: idna<2.7,>=2.5 in /opt/anaconda3/lib/python3.6/site-packages (from requests->autokeras) (2.6)
+Requirement already satisfied: urllib3<1.23,>=1.21.1 in /opt/anaconda3/lib/python3.6/site-packages (from requests->autokeras) (1.22)
+Requirement already satisfied: certifi>=2017.4.17 in /opt/anaconda3/lib/python3.6/site-packages (from requests->autokeras) (2018.11.29)
+Requirement already satisfied: python-dateutil>=2.5.0 in /opt/anaconda3/lib/python3.6/site-packages (from pandas->autokeras) (2.7.3)
+Requirement already satisfied: pytz>=2011k in /opt/anaconda3/lib/python3.6/site-packages (from pandas->autokeras) (2017.3)
+Collecting audioread>=2.0.0 (from librosa->autokeras)
+  Downloading https://files.pythonhosted.org/packages/f0/41/8cd160c6b2046b997d571a744a7f398f39e954a62dd747b2aae1ad7f07d4/audioread-2.1.6.tar.gz
+Collecting joblib>=0.12 (from librosa->autokeras)
+  Downloading https://files.pythonhosted.org/packages/49/d9/4ea194a4c1d0148f9446054b9135f47218c23ccc6f649aeb09fab4c0925c/joblib-0.13.1-py2.py3-none-any.whl (278kB)
+Requirement already satisfied: decorator>=3.0.0 in /opt/anaconda3/lib/python3.6/site-packages (from librosa->autokeras) (4.3.0)
+Collecting resampy>=0.2.0 (from librosa->autokeras)
+  Downloading https://files.pythonhosted.org/packages/14/b6/66a06d85474190b50aee1a6c09cdc95bb405ac47338b27e9b21409da1760/resampy-0.2.1.tar.gz (322kB)
+Requirement already satisfied: llvmlite>=0.27.0dev0 in /opt/anaconda3/lib/python3.6/site-packages (from numba->autokeras) (0.27.0)
+Collecting s3transfer<0.3.0,>=0.2.0 (from boto3->autokeras)
+  Downloading https://files.pythonhosted.org/packages/d7/de/5737f602e22073ecbded7a0c590707085e154e32b68d86545dcc31004c02/s3transfer-0.2.0-py2.py3-none-any.whl (69kB)
+Collecting botocore<1.13.0,>=1.12.89 (from boto3->autokeras)
+  Downloading https://files.pythonhosted.org/packages/c8/6c/2058039815eb4eac4f2f7462ecae3e352e994d6618ba1f27114d9b985618/botocore-1.12.89-py2.py3-none-any.whl (5.2MB)
+Collecting jmespath<1.0.0,>=0.7.1 (from boto3->autokeras)
+  Downloading https://files.pythonhosted.org/packages/b7/31/05c8d001f7f87f0f07289a5fc0fc3832e9a57f2dbd4d3b0fee70e0d51365/jmespath-0.9.3-py2.py3-none-any.whl
+Requirement already satisfied: cycler>=0.10 in /opt/anaconda3/lib/python3.6/site-packages (from matplotlib>=1.3.1->scikit-image->autokeras) (0.10.0)
+Requirement already satisfied: kiwisolver>=1.0.1 in /opt/anaconda3/lib/python3.6/site-packages (from matplotlib>=1.3.1->scikit-image->autokeras) (1.0.1)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /opt/anaconda3/lib/python3.6/site-packages (from matplotlib>=1.3.1->scikit-image->autokeras) (2.2.0)
+Requirement already satisfied: werkzeug>=0.11.10 in /opt/anaconda3/lib/python3.6/site-packages (from tensorboard<1.13.0,>=1.12.0->tensorflow==1.12.0->autokeras) (0.12.2)
+Requirement already satisfied: markdown>=2.6.8 in /opt/anaconda3/lib/python3.6/site-packages (from tensorboard<1.13.0,>=1.12.0->tensorflow==1.12.0->autokeras) (3.0.1)
+Requirement already satisfied: setuptools in /opt/anaconda3/lib/python3.6/site-packages (from protobuf>=3.6.1->tensorflow==1.12.0->autokeras) (39.1.0)
+Requirement already satisfied: docutils>=0.10 in /opt/anaconda3/lib/python3.6/site-packages (from botocore<1.13.0,>=1.12.89->boto3->autokeras) (0.14)
+Building wheels for collected packages: lightgbm, librosa, numba, lws, audioread, resampy
+  Running setup.py bdist_wheel for lightgbm: started
+  Running setup.py bdist_wheel for lightgbm: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/ec/5c/ae/06e82074b6f241f606e06b03ee108b6754d9181dd2bc883309
+  Running setup.py bdist_wheel for librosa: started
+  Running setup.py bdist_wheel for librosa: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/18/b8/10/f0f8f6ac60668a5cd75596cf14c25bb6b3ea1ecd815f058b7e
+  Running setup.py bdist_wheel for numba: started
+  Running setup.py bdist_wheel for numba: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/58/49/dc/0e49d776e95ab16f75d98eb6debe7142ec62137a13652e7a18
+  Running setup.py bdist_wheel for lws: started
+  Running setup.py bdist_wheel for lws: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/07/b1/1a/8dd583ce1048da5130e7cfef1b243c9a44be448f7a2fcf32d2
+  Running setup.py bdist_wheel for audioread: started
+  Running setup.py bdist_wheel for audioread: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/53/02/90/7b5c4081b7470c550ab605f600bad237dde12a6b8999b11f50
+  Running setup.py bdist_wheel for resampy: started
+  Running setup.py bdist_wheel for resampy: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/ff/4f/ed/2e6c676c23efe5394bb40ade50662e90eb46e29b48324c5f9b
+Successfully built lightgbm librosa numba lws audioread resampy
+Installing collected packages: keras, lightgbm, audioread, joblib, numba, resampy, librosa, inflect, unidecode, lws, jmespath, botocore, s3transfer, boto3, autokeras, tensorboard
+  Running setup.py develop for autokeras
+Successfully installed audioread-2.1.6 autokeras boto3-1.9.89 botocore-1.12.89 inflect-2.1.0 jmespath-0.9.3 joblib-0.13.1 keras-2.2.4 librosa-0.6.2 lightgbm-2.2.3 lws-1.2 numba-0.42.0 resampy-0.2.1 s3transfer-0.2.0 tensorboard-1.12.2 unidecode-1.0.23
+[91mYou are using pip version 18.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[0mRemoving intermediate container dd1264253977
+ ---> 230efe66aeed
+Step 19/22 : RUN /opt/anaconda3/bin/pip install nodejs jupyterlab keras
+ ---> Running in d23e558de5de
+Collecting nodejs
+  Downloading https://files.pythonhosted.org/packages/eb/ee/97ee0b973d072702eb2927c0eb90647cc0e4598663ed8e591c1ca4120dd9/nodejs-0.1.1.tar.gz
+Collecting jupyterlab
+  Downloading https://files.pythonhosted.org/packages/45/77/40f2a382508d78a3f9fc59b98d67edd5b2999f8441d3945bfd37d2351a4d/jupyterlab-0.35.4-py3-none-any.whl (14.7MB)
+Requirement already satisfied: keras in /opt/anaconda3/lib/python3.6/site-packages (2.2.4)
+Collecting optional-django==0.1.0 (from nodejs)
+  Downloading https://files.pythonhosted.org/packages/da/9e/b9b6a3854c613da94d695a2a52ca70ad1f0c65337c1b6e37f5f447964d19/optional-django-0.1.0.tar.gz
+Collecting jupyterlab-server<0.3.0,>=0.2.0 (from jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/78/77/e8a9c300afbe24aa46abaf1091d9e7b82328559e99cf2d601e858bcb3e1a/jupyterlab_server-0.2.0-py3-none-any.whl
+Collecting notebook>=4.3.1 (from jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/f8/a6/dbdf0954d073ab2cf5421cad20334d1e4c780da37205c04522c045298f67/notebook-5.7.4-py2.py3-none-any.whl (9.0MB)
+Requirement already satisfied: pyyaml in /opt/anaconda3/lib/python3.6/site-packages (from keras) (3.12)
+Requirement already satisfied: numpy>=1.9.1 in /opt/anaconda3/lib/python3.6/site-packages (from keras) (1.14.3)
+Requirement already satisfied: scipy>=0.14 in /opt/anaconda3/lib/python3.6/site-packages (from keras) (1.1.0)
+Requirement already satisfied: keras-preprocessing>=1.0.5 in /opt/anaconda3/lib/python3.6/site-packages (from keras) (1.0.5)
+Requirement already satisfied: keras-applications>=1.0.6 in /opt/anaconda3/lib/python3.6/site-packages (from keras) (1.0.6)
+Requirement already satisfied: six>=1.9.0 in /opt/anaconda3/lib/python3.6/site-packages (from keras) (1.11.0)
+Requirement already satisfied: h5py in /opt/anaconda3/lib/python3.6/site-packages (from keras) (2.8.0)
+Requirement already satisfied: jsonschema>=2.6.0 in /opt/anaconda3/lib/python3.6/site-packages (from jupyterlab-server<0.3.0,>=0.2.0->jupyterlab) (2.6.0)
+Collecting prometheus-client (from notebook>=4.3.1->jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/bc/e1/3cddac03c8992815519c5f50493097f6508fa153d067b494db8ab5e9c4ce/prometheus_client-0.5.0.tar.gz
+Collecting nbconvert (from notebook>=4.3.1->jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/b5/bb/94c493051d60e5b9c0f7f9a368b324201818c1b1c4cae85d1e49a41846c7/nbconvert-5.4.0-py2.py3-none-any.whl (405kB)
+Requirement already satisfied: pyzmq>=17 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (17.0.0)
+Requirement already satisfied: ipykernel in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (4.8.0)
+Requirement already satisfied: tornado>=4 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (5.0.2)
+Requirement already satisfied: jupyter-core>=4.4.0 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (4.4.0)
+Requirement already satisfied: traitlets>=4.2.1 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (4.3.2)
+Requirement already satisfied: jinja2 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (2.10)
+Requirement already satisfied: Send2Trash in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (1.4.2)
+Requirement already satisfied: ipython-genutils in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (0.2.0)
+Requirement already satisfied: jupyter-client>=5.2.0 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (5.2.3)
+Requirement already satisfied: terminado>=0.8.1 in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (0.8.1)
+Requirement already satisfied: nbformat in /opt/anaconda3/lib/python3.6/site-packages (from notebook>=4.3.1->jupyterlab) (4.4.0)
+Collecting defusedxml (from nbconvert->notebook>=4.3.1->jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/87/1c/17f3e3935a913dfe2a5ca85fa5ccbef366bfd82eb318b1f75dadbf0affca/defusedxml-0.5.0-py2.py3-none-any.whl
+Requirement already satisfied: entrypoints>=0.2.2 in /opt/anaconda3/lib/python3.6/site-packages (from nbconvert->notebook>=4.3.1->jupyterlab) (0.2.3)
+Requirement already satisfied: testpath in /opt/anaconda3/lib/python3.6/site-packages (from nbconvert->notebook>=4.3.1->jupyterlab) (0.3)
+Requirement already satisfied: bleach in /opt/anaconda3/lib/python3.6/site-packages (from nbconvert->notebook>=4.3.1->jupyterlab) (2.1.3)
+Collecting pandocfilters>=1.4.1 (from nbconvert->notebook>=4.3.1->jupyterlab)
+  Downloading https://files.pythonhosted.org/packages/4c/ea/236e2584af67bb6df960832731a6e5325fd4441de001767da328c33368ce/pandocfilters-1.4.2.tar.gz
+Requirement already satisfied: pygments in /opt/anaconda3/lib/python3.6/site-packages (from nbconvert->notebook>=4.3.1->jupyterlab) (2.2.0)
+Requirement already satisfied: mistune>=0.8.1 in /opt/anaconda3/lib/python3.6/site-packages (from nbconvert->notebook>=4.3.1->jupyterlab) (0.8.3)
+Requirement already satisfied: ipython>=4.0.0 in /opt/anaconda3/lib/python3.6/site-packages (from ipykernel->notebook>=4.3.1->jupyterlab) (6.4.0)
+Requirement already satisfied: MarkupSafe>=0.23 in /opt/anaconda3/lib/python3.6/site-packages (from jinja2->notebook>=4.3.1->jupyterlab) (1.0)
+Requirement already satisfied: python-dateutil>=2.1 in /opt/anaconda3/lib/python3.6/site-packages (from jupyter-client>=5.2.0->notebook>=4.3.1->jupyterlab) (2.7.3)
+Requirement already satisfied: html5lib!=1.0b1,!=1.0b2,!=1.0b3,!=1.0b4,!=1.0b5,!=1.0b6,!=1.0b7,!=1.0b8,>=0.99999999pre in /opt/anaconda3/lib/python3.6/site-packages (from bleach->nbconvert->notebook>=4.3.1->jupyterlab) (1.0.1)
+Requirement already satisfied: prompt-toolkit<2.0.0,>=1.0.15 in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (1.0.15)
+Requirement already satisfied: backcall in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.1.0)
+Requirement already satisfied: jedi>=0.10 in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.11.0)
+Requirement already satisfied: pickleshare in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.7.4)
+Requirement already satisfied: setuptools>=18.5 in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (39.1.0)
+Requirement already satisfied: decorator in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (4.3.0)
+Requirement already satisfied: pexpect; sys_platform != "win32" in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (4.3.0)
+Requirement already satisfied: simplegeneric>0.8 in /opt/anaconda3/lib/python3.6/site-packages (from ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.8.1)
+Requirement already satisfied: webencodings in /opt/anaconda3/lib/python3.6/site-packages (from html5lib!=1.0b1,!=1.0b2,!=1.0b3,!=1.0b4,!=1.0b5,!=1.0b6,!=1.0b7,!=1.0b8,>=0.99999999pre->bleach->nbconvert->notebook>=4.3.1->jupyterlab) (0.5.1)
+Requirement already satisfied: wcwidth in /opt/anaconda3/lib/python3.6/site-packages (from prompt-toolkit<2.0.0,>=1.0.15->ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.1.7)
+Requirement already satisfied: parso==0.1.* in /opt/anaconda3/lib/python3.6/site-packages (from jedi>=0.10->ipython>=4.0.0->ipykernel->notebook>=4.3.1->jupyterlab) (0.1.1)
+Building wheels for collected packages: nodejs, optional-django, prometheus-client, pandocfilters
+  Running setup.py bdist_wheel for nodejs: started
+  Running setup.py bdist_wheel for nodejs: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/08/dd/8a/460c064dd7665365011f49f5431df98d59970d3b8a1599436b
+  Running setup.py bdist_wheel for optional-django: started
+  Running setup.py bdist_wheel for optional-django: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/b9/0f/04/efd2745af85731eae4a16fd4c33a95d3ba243b5ad9ab43a5c7
+  Running setup.py bdist_wheel for prometheus-client: started
+  Running setup.py bdist_wheel for prometheus-client: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/1a/74/d7/dc59e0bf44fdfd6395c0076129453abf563e4aeca5d72c8574
+  Running setup.py bdist_wheel for pandocfilters: started
+  Running setup.py bdist_wheel for pandocfilters: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/39/01/56/f1b08a6275acc59e846fa4c1e1b65dbc1919f20157d9e66c20
+Successfully built nodejs optional-django prometheus-client pandocfilters
+Installing collected packages: optional-django, nodejs, prometheus-client, defusedxml, pandocfilters, nbconvert, notebook, jupyterlab-server, jupyterlab
+Successfully installed defusedxml-0.5.0 jupyterlab-0.35.4 jupyterlab-server-0.2.0 nbconvert-5.4.0 nodejs-0.1.1 notebook-5.7.4 optional-django-0.1.0 pandocfilters-1.4.2 prometheus-client-0.5.0
+[91mYou are using pip version 18.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[0mRemoving intermediate container d23e558de5de
+ ---> e1682d8d48b1
+Step 20/22 : RUN /opt/anaconda3/bin/pip install -e git+https://github.com/adamjm/autokeras.git#egg=autokeras
+ ---> Running in 154bcbe5cb1f
+Obtaining autokeras from git+https://github.com/adamjm/autokeras.git#egg=autokeras
+  Updating ./src/autokeras clone
+Requirement already satisfied: scipy in /opt/anaconda3/lib/python3.6/site-packages (from autokeras) (1.1.0)
+Collecting torch==1.0.0 (from autokeras)
+[91m  Could not find a version that satisfies the requirement torch==1.0.0 (from autokeras) (from versions: 0.1.2, 0.1.2.post1)
+[0m[91mNo matching distribution found for torch==1.0.0 (from autokeras)
+[0m[91mYou are using pip version 18.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[0mSending build context to Docker daemon  310.3kB
+Step 1/20 : FROM ibmcom/powerai:1.5.4-all-ubuntu18.04-py3
+ ---> 5fdfbb09ae06
+Step 2/20 : COPY app /app
+ ---> Using cache
+ ---> e95e9f8ad7fc
+Step 3/20 : WORKDIR /app
+ ---> Using cache
+ ---> 1678d9823f72
+Step 4/20 : USER root
+ ---> Using cache
+ ---> 5e365407d812
+Step 5/20 : RUN mkdir /root/.ssh && mkdir /home/pwrai/.ssh
+ ---> Using cache
+ ---> 5916363c1d48
+Step 6/20 : RUN mkdir -p /root/.jupyter && mkdir -p /home/pwrai/.jupyter && cp jupyter_notebook_config.py /root/.jupyter/ && cp jupyter_notebook_config.py /home/pwrai/.jupyter/
+ ---> Using cache
+ ---> 019f1bcc4775
+Step 7/20 : RUN chmod +x /app/ssh_key_copy.sh
+ ---> Using cache
+ ---> 7d50cfe97240
+Step 8/20 : RUN mkdir /run/sshd && mkdir /notebooks
+ ---> Using cache
+ ---> c65a4e6b6ed1
+Step 9/20 : COPY llvm-alternatives/llvm-alternatives /app
+ ---> Using cache
+ ---> 4eb6ea567ae3
+Step 10/20 : RUN apt-get update && apt-get install -y git vim cmake gfortran wget &&  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - && apt-get update && apt-get install -y libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime
+ ---> Using cache
+ ---> 840f17931a55
+Step 11/20 : ARG PATH=/opt/anaconda3/bin/:$PATH
+ ---> Using cache
+ ---> 8803a09ed89e
+Step 12/20 : ENV PATH=/opt/anaconda3/bin/:$PATH
+ ---> Using cache
+ ---> 8f6c4cc425e4
+Step 13/20 : ARG LICENSE=yes
+ ---> Using cache
+ ---> 3a6d3ae86ba4
+Step 14/20 : ENV LICENSE=yes
+ ---> Using cache
+ ---> bd4c1cee1906
+Step 15/20 : SHELL ["/bin/bash", "-c"]
+ ---> Using cache
+ ---> 76318fdb9534
+Step 16/20 : RUN cp /usr/bin/make /usr/bin/make.orig && echo "#!/bin/bash" >> /usr/bin/make && echo  "make -j 128 $1" >> /usr/bin/make && chmod +x /usr/bin/make
+ ---> Using cache
+ ---> 51fe3556011d
+Step 17/20 : RUN echo "Status=9" > /opt/DL/license/lap_se/license/status.dat
+ ---> Using cache
+ ---> 1568357d5c59
+Step 18/20 : RUN /opt/anaconda3/bin/conda install -y llvmlite &&     source /opt/DL/tensorflow/bin/tensorflow-activate &&      source /opt/DL/pytorch/bin/pytorch-activate &&  /opt/anaconda3/bin/pip install -e git+https://github.com/adamjm/autokeras.git#egg=autokeras
+ ---> Using cache
+ ---> 230efe66aeed
+Step 19/20 : RUN /opt/anaconda3/bin/pip install nodejs jupyterlab keras
+ ---> Using cache
+ ---> e1682d8d48b1
+Step 20/20 : CMD ["/bin/bash", "/app/ssh_key_copy.sh"]
+ ---> Running in e01e80ec7057
+Removing intermediate container e01e80ec7057
+ ---> fe06bbbfeeb4
+Successfully built fe06bbbfeeb4
+Successfully tagged powerai-jupyter:1.5.4-all-ubuntu18.04-py3

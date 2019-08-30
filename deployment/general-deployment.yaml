@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: <USER>-service
+  namespace: <NAMESPACE>
+  labels:
+    app: tf-notebook-<USER>
+spec:
+  ports:
+  - name: ssh
+    protocol: TCP
+    port: 22
+    targetPort: 22
+  - name: jupyter
+    protocol: TCP
+    port: 8888
+    targetPort: 8888
+  - name: tensorboard
+    protocol: TCP
+    port: 6006
+    targetPort: 6006
+  selector:
+    app: tf-notebook-<USER>
+  clusterIP: 
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <USER>-pvc-claim
+  namespace: <NAMESPACE>
+  labels:
+    app: tf-notebook-<USER>
+  annotations:
+    storageClass: nfs-client
+  finalizers:
+  - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: nfs-client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tf-notebook-<USER>
+  namespace: <NAMESPACE>
+  labels:
+    app: tf-notebook-<USER>
+  annotations:
+    deployment.kubernetes.io/revision: '3'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tf-notebook-<USER>
+  template:
+    metadata:
+      labels:
+        app: tf-notebook-<USER>
+    spec:
+      volumes:
+      - name: work
+        emptyDir: {}
+      - name: jupyter-persistent-storage
+        persistentVolumeClaim:
+          claimName: <USER>-pvc-claim
+      containers:
+      - name: tf-notebook-<USER>
+        image: mycluster.icp:8500/<NAMESPACE>/powerai-jupyter:1.6.1-all-ubuntu18.04-py3
+        env:
+        - name: PASSWORD
+          value: "sha1:b8fdd05ca4fd:ad4c757ca8132a4c51fb584f9e0c4aa08523b0b3"
+        - name: SSH_KEY
+          value: "ssh-rsa <YOUR-PUBLIC-SSH-KEY-HERE>"
+        ports:
+        - name: jupyter
+          containerPort: 8888
+          protocol: TCP
+        - name: tensorboard
+          containerPort: 6006
+          protocol: TCP
+        - name: ssh
+          containerPort: 22
+          protocol: TCP
+        resources:
+          limits:
+            nvidia.com/gpu: '1'
+        volumeMounts:
+        - name: work
+          mountPath: "/notebooks"
+        - name: jupyter-persistent-storage
+          mountPath: "/notebooks/datasets"
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: File
+        imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600 

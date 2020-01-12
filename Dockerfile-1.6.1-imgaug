@@ -1,0 +1,15 @@
+FROM  mycluster.icp:8500/powerai/powerai-jupyter:1.6.1-all-ubuntu18.04-py3
+
+RUN mkdir /geo
+WORKDIR /geo
+
+RUN wget http://download.osgeo.org/geos/geos-3.7.3.tar.bz2 && tar xvf geos-3.7.3.tar.bz2 && cd geos-3.7.2/ && ./configure && make -j 64 && make install
+
+ARG LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+RUN mkdir /Shapely && git clone https://github.com/Toblerity/Shapely.git /Shapely && cd /Shapely && /opt/anaconda3/bin/pip install . 
+RUN mkdir /imgaug && git clone https://github.com/aleju/imgaug.git /imgaug && cd /imgaug && /opt/anaconda3/bin/pip install . 
+RUN mkdir /Mask_RCNN && git clone https://github.com/matterport/Mask_RCNN.git /Mask_RCNN && cd /Mask_RCNN && /opt/anaconda3/bin/pip install -r requirements.txt && /opt/anaconda3/bin/pip install pycocotools
+
+CMD ["/bin/bash", "/app/ssh_key_copy.sh"]

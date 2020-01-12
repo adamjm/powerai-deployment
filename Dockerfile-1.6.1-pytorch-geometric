@@ -1,0 +1,10 @@
+FROM powerai/powerai-jupyter:1.6.1
+
+
+RUN /opt/anaconda3/bin/pip install --verbose --no-cache-dir torch-scatter && \
+    /opt/anaconda3/bin/pip install --verbose --no-cache-dir torch-sparse && \
+    /opt/anaconda3/bin/pip install --verbose --no-cache-dir torch-cluster && \
+    /opt/anaconda3/bin/pip install --verbose --no-cache-dir torch-spline-conv && \
+    /opt/anaconda3/bin/pip install torch-geometric
+
+CMD ["/bin/bash", "/app/ssh_key_copy.sh"]

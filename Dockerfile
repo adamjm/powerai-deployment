@@ -16,4 +16,5 @@ RUN git clone https://github.com/explosion/cymem.git /cymem && cd /cymem && pip 
 RUN git clone https://github.com/adamjm/thinc /thinc && cd /thinc &&  pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
 RUN cd / && git clone https://github.com/adamjm/spaCy /spacy && cd /spacy && mv include/numpy include/numpy.old && ln -s /opt/anaconda3/lib/python3.6/site-packages/numpy/core/include/numpy include/ && ls -ltr include/ && ls -ltr include/numpy/ && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
 RUN pip install fastai==1.0.51 tensorboardX==1.6 ffmpeg ffmpeg-python==0.1.17 youtube-dl>=2019.4.17
+RUN pip install ludwig[text,viz]
 CMD ["/bin/bash", "/app/ssh_key_copy.sh"]

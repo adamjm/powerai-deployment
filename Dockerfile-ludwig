@@ -13,7 +13,11 @@ RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /cython-blis 
 RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install -e git+https://github.com/explosion/thinc_gpu_ops#egg=thinc_gpu_ops
 RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && git clone https://github.com/explosion/cymem.git /cymem && cd /cymem && pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
 RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && git clone https://github.com/adamjm/thinc /thinc && cd /thinc &&  pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
-RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && cd / && git clone https://github.com/explosion/spaCy /spacy && cd /spacy && git checkout v2.2.2 && mv include/numpy include/numpy.old && ln -s /opt/anaconda/envs/wmlce/lib/python3.7/site-packages/numpy/core/include/numpy include/ && ls -ltr include/ && ls -ltr include/numpy/ && pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install cython==0.29.14 && cd / && git clone https://github.com/explosion/spaCy /spacy && cd /spacy && git checkout v2.2.2 && mv include/numpy include/numpy.old && ln -s /opt/anaconda/envs/wmlce/lib/python3.7/site-packages/numpy/core/include/numpy include/ && ls -ltr include/ && ls -ltr include/numpy/ && pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
 RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install fastai==1.0.51 tensorboardX==1.6 ffmpeg ffmpeg-python==0.1.17 youtube-dl>=2019.4.17
-RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install ludwig[text,viz]
-CMD ["/bin/bash", "/app/ssh_key_copy.sh"]
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /ludwig && git clone https://github.com/uber/ludwig /ludwig && cd /ludwig && pip install -r requirements.txt -r requirements_text.txt \
+          -r requirements_image.txt -r requirements_audio.txt \
+          -r requirements_serve.txt -r requirements_viz.txt && python setup.py install 
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" &&  pip install ipykernel && python -m ipykernel install --user --name wmlce --display-name "wmlce"
+ENV NB_PREFIX /
+CMD ["/bin/bash", "/app/launch_jupyter.sh"]

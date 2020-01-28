@@ -1,0 +1,7 @@
+FROM powerai/powerai-jupyter:1.6.2
+ENV CONDA_ENV=wmlce
+# Steps to install Spacy
+#
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && conda install pybind11 
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install https://powerci.osuosl.org/job/TensorFlow2_PPC64LE_GPU_Release_Build/lastSuccessfulBuild/artifact/tensorflow_pkg/tensorflow-2.1.0-cp37-cp37m-linux_ppc64le.whl
+

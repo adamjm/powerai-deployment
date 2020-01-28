@@ -22,4 +22,4 @@ RUN /opt/anaconda/bin/conda install -n wmlce -c numba -y llvmlite cython
 RUN /opt/anaconda/bin/conda install -n wmlce nodejs jupyterlab 
 RUN /opt/anaconda/bin/conda install -n wmlce cudatoolkit
 RUN cp /app/health-check-gpu /usr/bin/ && chmod +x /usr/bin/health-check-gpu
-CMD ["/bin/bash"] #, "/app/ssh_key_copy.sh"]
+CMD ["/bin/bash", "/app/ssh_key_copy.sh"]

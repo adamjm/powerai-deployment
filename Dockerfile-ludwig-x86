@@ -1,0 +1,34 @@
+FROM powerai/powerai-jupyter:1.6.2
+RUN apt-get update && apt-get install -y pkg-config
+ENV CONDA_ENV=wmlce
+# Steps to install Spacy
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /sentencepiece/ && git clone https://github.com/google/sentencepiece.git /sentencepiece && cd /sentencepiece/ && mkdir build && \
+cd build && cmake .. && make -j 68 && make install && ldconfig -v && cd ../python && python setup.py build && python setup.py install
+
+RUN apt-get update && apt-get install -y autoconf
+#ARG BLIS_ARCH=power9
+#ENV BLIS_ARCH=power9
+#RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /cython-blis && git clone --recursive https://github.com/explosion/cython-blis.git /cython-blis && cd /cython-blis && pip install -r dev-requirements.txt && ./bin/generate-make-jsonl linux power9 && python setup.py build_ext --inplace && python setup.py bdist_wheel && python setup.py install
+#git clone https://github.com/flame/blis.git /blis && cd /blis && ./configure power9 && make -j 64 && make install 
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install -e git+https://github.com/explosion/thinc_gpu_ops#egg=thinc_gpu_ops
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && git clone https://github.com/explosion/cymem.git /cymem && cd /cymem && pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && git clone https://github.com/adamjm/thinc /thinc && cd /thinc &&  pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install cython==0.29.14 && cd / && git clone https://github.com/explosion/spaCy /spacy && cd /spacy && git checkout v2.2.2 && mv include/numpy include/numpy.old && ln -s /opt/anaconda/envs/wmlce/lib/python3.7/site-packages/numpy/core/include/numpy include/ && ls -ltr include/ && ls -ltr include/numpy/ && pip install -r requirements.txt && python setup.py build_ext --inplace && python setup.py bdist_wheel && pip install dist/*whl
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install fastai==1.0.51 tensorboardX==1.6 ffmpeg ffmpeg-python==0.1.17 youtube-dl>=2019.4.17
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /ludwig && git clone https://github.com/uber/ludwig /ludwig && cd /ludwig && pip install -r requirements.txt -r requirements_text.txt \
+          -r requirements_image.txt -r requirements_audio.txt \
+          -r requirements_serve.txt -r requirements_viz.txt && python setup.py install 
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" &&  pip install ipykernel && python -m ipykernel install --user --name wmlce --display-name "wmlce"
+#RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && conda  install -n wmlce hdfs3 -c conda-forge
+#RUN echo "deb https://dl.bintray.com/wangzw/deb trusty contrib" | sudo tee /etc/apt/sources.list.d/bintray-wangzw-deb.list && apt-get install -y apt-transport-https && apt-get update && apt-get install libhdfs3 libhdfs3-dev
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y libxml2 libxml2-dev krb5-user krb5-kdc krb5-admin-server libkrad-dev libuuid1 libgsasl7-dev libgsasl7 libkrb5-dev google-mock googletest libgtest-dev curl libcurl4-openssl-dev openjdk-8-jdk
+#RUN mkdir /googletest && git clone https://github.com/google/googletest.git /googletest && cd /googletest && git checkout release-1.7.0 && mkdir build && cd build && cmake .. && make -j 4 && mkdir -p /gtest/lib && mkdir -p /gtest/include && cp -rf /googletest/include/
+
+#RUN mkdir /googlemock && git clone https://github.com/google/googlemock.git /googlemock && cd /googlemock && git checkout release-1.7.0 && cd make  && make .. && make -j 4 
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && mkdir /libhdfs3 && git clone https://github.com/adamjm/libhdfs3-downstream.git /libhdfs3 && cd /libhdfs3 && git checkout notest && cd libhdfs3/ && mkdir build && cd build && ../bootstrap --dependency=/opt/anaconda/envs/wmlce/lib/:/opt/anaconda/envs/wmlce/include/ && make -j 4 && make install
+ENV LD_LIBRARY_PATH=/libhdfs3/libhdfs3/dist/lib/:$LD_LIBRARY_PATH
+RUN mkdir /hdfs3 && git clone https://github.com/dask/hdfs3.git /hdfs3 && cd /hdfs3 &&  eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && python setup.py install
+RUN eval "$(conda shell.bash hook |sed 's/base/wmlce/g')" && pip install pyarrow dask 
+RUN cd / && wget http://apache.mirror.amaze.com.au/hadoop/common/hadoop-2.8.5/hadoop-2.8.5.tar.gz && tar xvf hadoop-2.8.5.tar.gz && mv /hadoop-2.8.5 /hadoop/ 
+ENV NB_PREFIX /
+CMD ["/bin/bash", "/app/launch_jupyter.sh"]
